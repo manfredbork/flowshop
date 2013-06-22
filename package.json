@@ -1,0 +1,16 @@
+{
+    "name": "flowshop",
+    "version": "0.0.0",
+    "description": "Framework for Permutation Flow Shop Scheduling Problems",
+    "keywords" : ["flowshop", "scheduling", "pfsp", "fsp"],
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/rhinebytes/flowshop.git"
+    },
+    "author": {
+        "name": "Manfred Bork",
+        "email": "bork.ma@t-online.de"
+    },
+    "license": "MIT"
+}
