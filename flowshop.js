@@ -5,8 +5,8 @@ module.exports = Flowshop;
 /*--------------------------------------------------------------*/
 /* Implementation of makespan can be reused in every algorithm
 /*--------------------------------------------------------------*/
-Flowshop.prototype.makespan = function(data) {
-    var grid = [], ord = this.order(data);
+Flowshop.prototype.makespan = function(data, order) {
+    var grid = [], ord = order || this.order(data);
     for(var i = 0; i < ord.length; i++) {
         grid[i] = [];
         for(var j = 0; j < data.numberOfMachines; j++) {
