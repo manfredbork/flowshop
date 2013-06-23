@@ -13,6 +13,6 @@ exports.makespan = Algorithm.prototype.makespan;
 /* Only overwrite order to implement any algorithm
 /*--------------------------------------------------------*/
 Algorithm.prototype.order = function(data) {
-    return Flowshop.prototype.order(data);
+    return data;
 };
 exports.order = Algorithm.prototype.order;
