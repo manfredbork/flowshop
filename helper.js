@@ -38,7 +38,7 @@ Helper.prototype.toggle = function(data, firstPosition, secondPosition) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
     }
-    var clone = data.slice(), value = clone[firstPosition - 1];
+    var clone = [].concat(data), value = clone[firstPosition - 1];
     clone[firstPosition - 1] = clone[secondPosition - 1];
     clone[secondPosition - 1] = value;
     return clone;
@@ -76,13 +76,24 @@ Helper.prototype.insertBefore = function(data, position, value) {
 exports.insertBefore = Helper.prototype.insertBefore;
 
 /*--------------------------------------------------------*/
+/* Get value from specified field in array
+/*--------------------------------------------------------*/
+Helper.prototype.get = function(data, position) {
+    if(!Helper.prototype.isValidData(data)) {
+        return data;
+    }
+    return [].concat(data[position - 1]);
+};
+exports.get = Helper.prototype.get;
+
+/*--------------------------------------------------------*/
 /* Sort data as in NEH algorithm setup defined
 /*--------------------------------------------------------*/
 Helper.prototype.sort = function(data) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
     }
-    return data.slice().sort(comparator);
+    return [].concat(data).sort(comparator);
 };
 exports.sort = Helper.prototype.sort;
 
