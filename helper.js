@@ -23,7 +23,7 @@ Helper.prototype.makespan = function(data) {
     var grid = [];
     for(var i = 0; i < data.length; i++) {
         grid[i] = [];
-        for(var j = 0; j < data[i].length; j++) {
+        for(var j = 0; j < data[i].length ; j++) {
             grid[i][j] = Math.max((grid[i - 1] || [])[j] || 0, (grid[i] || [])[j - 1] || 0) + data[i][j];
         }
     }
@@ -63,7 +63,7 @@ Helper.prototype.insertAfter = function(data, position, value) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
     }
-    return data.slice(0, position).concat([value]).concat(data.slice(position));
+    return data.slice(0, position).concat(value).concat(data.slice(position));
 };
 exports.insertAfter = Helper.prototype.insertAfter;
 
@@ -74,3 +74,29 @@ Helper.prototype.insertBefore = function(data, position, value) {
     return Helper.prototype.insertAfter(data, position - 1, value);
 };
 exports.insertBefore = Helper.prototype.insertBefore;
+
+/*--------------------------------------------------------*/
+/* Sort data as in NEH algorithm setup defined
+/*--------------------------------------------------------*/
+Helper.prototype.sort = function(data) {
+    if(!Helper.prototype.isValidData(data)) {
+        return data;
+    }
+    return data.slice().sort(comparator);
+};
+exports.sort = Helper.prototype.sort;
+
+function comparator(a, b) {
+    if(sum(a) > sum(b)) {
+        return -1;
+    }
+    return 1;
+}
+
+function sum(data) {
+    var sum = 0;
+    for(var i = 0; i < (data || []).length; i++) {
+        sum = sum + (data[i] || 0);
+    }
+    return sum;
+}
