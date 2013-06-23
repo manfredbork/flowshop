@@ -1,9 +1,9 @@
 var T = require('./taillard');
-var NOP = require('./nop');
+var A = require('./algorithm');
 
-/*--------------------------------------------------------------*/
+/*--------------------------------------------------------*/
 /* Iterate over each Taillard set and call makespan
-/*--------------------------------------------------------------*/
+/*--------------------------------------------------------*/
 for(var i = 0; i < T.length; i++) {
 
     console.log('     number of jobs:', T[i].numberOfJobs);
@@ -11,7 +11,7 @@ for(var i = 0; i < T.length; i++) {
     console.log('       initial seed:', T[i].initialSeed);
     console.log('        upper bound:', T[i].upperBound);
     console.log('        lower bound:', T[i].lowerBound);
-    console.log('           makespan:', NOP.makespan(T[i]));
+    console.log('           makespan:', A.makespan(T[i].data));
     console.log('__________________________________________________');
 
 }

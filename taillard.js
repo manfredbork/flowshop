@@ -1,13 +1,13 @@
 var fs = require('fs');
 
+/*--------------------------------------------------------*/
+/* Import and parse Taillard sets from directory
+/*--------------------------------------------------------*/
 function Taillard(path) {
     return parseFiles(path + '/');
 }
 module.exports = Taillard('taillard');
 
-/*--------------------------------------------------------------*/
-/* Private functions to import and parse Taillard sets
-/*--------------------------------------------------------------*/
 function parseLine(line) {
     var finalValues = [], rawValues = line.split(/\s{1,}/g);
     for(var i = 0; i < rawValues.length; i++) {
@@ -41,7 +41,7 @@ function parseFiles(path) {
         for(var j = 0; j < rawData.length; j++) {
             if(j === nextHeaderData) {
                 tempData = {
-                    processingTime: [],
+                    data: [],
                     numberOfJobs: rawData[j][0],
                     numberOfMachines: rawData[j][1],
                     initialSeed: rawData[j][2],
@@ -51,7 +51,7 @@ function parseFiles(path) {
                 nextHeaderData = nextHeaderData + tempData.numberOfMachines + 1;
                 finalData.push(tempData);
             } else {
-                tempData.processingTime.push(rawData[j]);
+                tempData.data.push(rawData[j]);
             }
         }
     }
