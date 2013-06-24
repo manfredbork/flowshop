@@ -5,7 +5,6 @@ var fs = require('fs');
 /*--------------------------------------------------------*/
 function Taillard() {
 }
-Taillard.exports = Taillard;
 
 /*--------------------------------------------------------*/
 /* Filter Taillard sets by number of jobs and machines
