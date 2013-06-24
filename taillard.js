@@ -3,10 +3,23 @@ var fs = require('fs');
 /*--------------------------------------------------------*/
 /* Import and parse Taillard sets from directory
 /*--------------------------------------------------------*/
-function Taillard(path) {
-    return parseFiles(path + '/');
+function Taillard() {
 }
-module.exports = Taillard('taillard');
+Taillard.exports = Taillard;
+
+/*--------------------------------------------------------*/
+/* Filter Taillard sets by number of jobs and machines
+/*--------------------------------------------------------*/
+Taillard.prototype.filter = function(jobs, machines) {
+    var data = parseFiles('taillard/'), filteredData = [];
+    for(var i = 0; i < data.length; i++) {
+        if(data[i].numberOfJobs === jobs && data[i].numberOfMachines === machines) {
+            filteredData.push(data[i]);
+        }
+    }
+    return filteredData.reverse();
+};
+exports.filter = Taillard.prototype.filter;
 
 function parseLine(line) {
     var finalValues = [], rawValues = line.split(/\s{1,}/g);
