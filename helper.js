@@ -3,7 +3,6 @@
 /*--------------------------------------------------------*/
 function Helper() {
 }
-Helper.exports = Helper;
 
 /*--------------------------------------------------------*/
 /* Check if data is two dimensional array
@@ -63,7 +62,7 @@ Helper.prototype.insertAfter = function(data, position, value) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
     }
-    return data.slice(0, position).concat(value).concat(data.slice(position));
+    return data.slice(0, position).concat([value]).concat(data.slice(position));
 };
 exports.insertAfter = Helper.prototype.insertAfter;
 
@@ -103,6 +102,14 @@ function comparator(a, b) {
     }
     return 1;
 }
+
+/*--------------------------------------------------------*/
+/* Sum values of fields in array
+ /*--------------------------------------------------------*/
+Helper.prototype.sum = function(data) {
+    return sum(data);
+};
+exports.sum = Helper.prototype.sum;
 
 function sum(data) {
     var sum = 0;
