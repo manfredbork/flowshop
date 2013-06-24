@@ -16,4 +16,3 @@ for(var i = 0; i < filteredSets.length; i++) {
     console.log('__________________________________________________');
 
 }
-
