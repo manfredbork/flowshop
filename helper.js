@@ -9,7 +9,7 @@ Helper.exports = Helper;
 /* Check if data is two dimensional array
 /*--------------------------------------------------------*/
 Helper.prototype.isValidData = function(data) {
-    return data && data.length > 0 && data[data.length - 1].length > 0;
+    return data && data.length > 0 && (data[data.length - 1] || []).length > 0;
 };
 exports.isValidData = Helper.prototype.isValidData;
 
