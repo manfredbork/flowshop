@@ -86,7 +86,7 @@ Helper.prototype.get = function(data, position) {
 exports.get = Helper.prototype.get;
 
 /*--------------------------------------------------------*/
-/* Sort data as in NEH algorithm setup defined
+/* Sort data in descending order
 /*--------------------------------------------------------*/
 Helper.prototype.sort = function(data) {
     if(!Helper.prototype.isValidData(data)) {
