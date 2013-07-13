@@ -11,7 +11,7 @@ util.inherits(NEH, Flowshop);
 exports.makespan = NEH.prototype.makespan;
 
 /*--------------------------------------------------------*/
-/* NEH heuristic and insertion technique
+/* NEH heuristic
 /*--------------------------------------------------------*/
 NEH.prototype.order = function(data) {
     var order = Helper.sort(data);
