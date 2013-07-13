@@ -45,6 +45,7 @@ function parseFile(file) {
 function parseFiles(path) {
     var finalData = [], fileList = fs.readdirSync(path);
     for(var i = 0; i < fileList.length; i++) {
+        var counter = counterByFileName(fileList[i]);
         var tempData = {
             data: []
         };
@@ -53,6 +54,7 @@ function parseFiles(path) {
         for(var j = 0; j < rawData.length; j++) {
             if(j === nextHeaderData) {
                 tempData = {
+                    name: 'ta' + fillWithZeros('' + counter, 3),
                     data: [],
                     numberOfJobs: rawData[j][0],
                     numberOfMachines: rawData[j][1],
@@ -62,10 +64,38 @@ function parseFiles(path) {
                 };
                 nextHeaderData = nextHeaderData + tempData.numberOfMachines + 1;
                 finalData.push(tempData);
+                if(counter > 0) {
+                    counter++;
+                }
             } else {
                 tempData.data.push(rawData[j]);
             }
         }
     }
     return finalData.reverse();
+}
+
+function fillWithZeros(input, length) {
+    while(input.length < length) {
+        input = '0' + input;
+    }
+    return input;
+}
+
+function counterByFileName(fileName) {
+    var map = {
+        'tai20_5.txt': 1,
+        'tai20_10.txt': 11,
+        'tai20_20.txt': 21,
+        'tai50_5.txt': 31,
+        'tai50_10.txt': 41,
+        'tai50_20.txt': 51,
+        'tai100_5.txt': 61,
+        'tai100_10.txt': 71,
+        'tai100_20.txt': 81,
+        'tai200_10.txt': 91,
+        'tai200_20.txt': 101,
+        'tai500_20.txt': 111
+    };
+    return map[fileName] || '???';
 }
