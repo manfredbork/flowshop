@@ -14,13 +14,13 @@ exports.makespan = NEH.prototype.makespan;
 /* NEH heuristic
 /*--------------------------------------------------------*/
 NEH.prototype.order = function(data) {
-    var order = Helper.sort(data);
-    var neh = [Helper.get(order, 1), Helper.get(order, 2)];
+    var pi = Helper.sort(data);
+    var neh = [Helper.get(pi, 1), Helper.get(pi, 2)];
     if(Helper.makespan(neh) > Helper.makespan(Helper.toggle(neh, 1, 2))) {
         neh = Helper.toggle(neh, 1, 2);
     }
-    for(var i = 3; i < order.length + 1; i++) {
-        var sequence = Helper.insertBefore(neh, 1, Helper.get(order, i));
+    for(var i = 3; i < pi.length + 1; i++) {
+        var sequence = Helper.insertBefore(neh, 1, Helper.get(pi, i));
         var value = Helper.makespan(sequence);
         var minSequence = sequence;
         var minValue = value;
