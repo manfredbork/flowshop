@@ -1,13 +1,13 @@
 var fs = require('fs');
 
 /*--------------------------------------------------------*/
-/* Import and parse Taillard sets from directory
+/* Import and parse Taillard instances from directory
 /*--------------------------------------------------------*/
 function Taillard() {
 }
 
 /*--------------------------------------------------------*/
-/* Filter Taillard sets by number of jobs and machines
+/* Filter Taillard instances by jobs and machines
 /*--------------------------------------------------------*/
 Taillard.prototype.filter = function(jobs, machines) {
     var data = parseFiles('taillard/'), filteredData = [];
