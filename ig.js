@@ -1,7 +1,6 @@
 var util = require('util');
 var Flowshop = require('./flowshop');
 var NEH = require('./neh.js');
-//var Helper = require('./helper.js');
 
 /*--------------------------------------------------------*/
 /* Iterated Greedy algorithm
