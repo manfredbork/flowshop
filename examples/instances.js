@@ -1,9 +1,7 @@
 var instances = require('./../taillard');
 var NEH = require('./../neh');
 
-/*--------------------------------------------------------*/
-/* Iterate over filtered Taillard instances
-/*--------------------------------------------------------*/
+// Iterate over filtered Taillard instances
 var filteredInstances = instances.filter(50, 20);
 for(var i = 0; i < filteredInstances.length; i++) {
 
