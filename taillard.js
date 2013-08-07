@@ -1,14 +1,10 @@
 var fs = require('fs');
 
-/*--------------------------------------------------------*/
-/* Import and parse Taillard instances from directory
-/*--------------------------------------------------------*/
+// Import and parse Taillard instances from directory
 function Taillard() {
 }
 
-/*--------------------------------------------------------*/
-/* Filter Taillard instances by jobs and machines
-/*--------------------------------------------------------*/
+// Filter Taillard instances by jobs and machines
 Taillard.prototype.filter = function(jobs, machines) {
     var data = parseFiles('taillard/'), filteredData = [];
     for(var i = 0; i < data.length; i++) {
@@ -97,5 +93,5 @@ function counterByFileName(fileName) {
         'tai200_20.txt': 101,
         'tai500_20.txt': 111
     };
-    return map[fileName] || '???';
+    return map[fileName] || '';
 }

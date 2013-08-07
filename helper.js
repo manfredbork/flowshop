@@ -1,20 +1,14 @@
-/*--------------------------------------------------------*/
-/* Collection of helper functions
-/*--------------------------------------------------------*/
+// Collection of helper functions
 function Helper() {
 }
 
-/*--------------------------------------------------------*/
-/* Check if data is two dimensional array
-/*--------------------------------------------------------*/
+// Check if data is two dimensional array
 Helper.prototype.isValidData = function(data) {
     return data && data.length > 0 && (data[data.length - 1] || []).length > 0;
 };
 exports.isValidData = Helper.prototype.isValidData;
 
-/*--------------------------------------------------------*/
-/* Basic makespan implementation
-/*--------------------------------------------------------*/
+// Basic makespan implementation
 Helper.prototype.makespan = function(data) {
     if(!Helper.prototype.isValidData(data)) {
         return 0;
@@ -30,9 +24,7 @@ Helper.prototype.makespan = function(data) {
 };
 exports.makespan = Helper.prototype.makespan;
 
-/*--------------------------------------------------------*/
-/* Toggle specified values in array
-/*--------------------------------------------------------*/
+// Toggle specified values in array
 Helper.prototype.toggle = function(data, firstPosition, secondPosition) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
@@ -44,9 +36,7 @@ Helper.prototype.toggle = function(data, firstPosition, secondPosition) {
 };
 exports.toggle = Helper.prototype.toggle;
 
-/*--------------------------------------------------------*/
-/* Remove field in array
-/*--------------------------------------------------------*/
+// Remove field in array
 Helper.prototype.remove = function(data, position) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
@@ -55,9 +45,7 @@ Helper.prototype.remove = function(data, position) {
 };
 exports.remove = Helper.prototype.remove;
 
-/*--------------------------------------------------------*/
-/* Insert value after specified field in array
-/*--------------------------------------------------------*/
+// Insert value after specified field in array
 Helper.prototype.insertAfter = function(data, position, value) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
@@ -66,17 +54,13 @@ Helper.prototype.insertAfter = function(data, position, value) {
 };
 exports.insertAfter = Helper.prototype.insertAfter;
 
-/*--------------------------------------------------------*/
-/* Insert value before specified field in array
-/*--------------------------------------------------------*/
+// Insert value before specified field in array
 Helper.prototype.insertBefore = function(data, position, value) {
     return Helper.prototype.insertAfter(data, position - 1, value);
 };
 exports.insertBefore = Helper.prototype.insertBefore;
 
-/*--------------------------------------------------------*/
-/* Get value from specified field in array
-/*--------------------------------------------------------*/
+// Get value from specified field in array
 Helper.prototype.get = function(data, position) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
@@ -85,9 +69,7 @@ Helper.prototype.get = function(data, position) {
 };
 exports.get = Helper.prototype.get;
 
-/*--------------------------------------------------------*/
-/* Sort data in descending order
-/*--------------------------------------------------------*/
+// Sort data in descending order
 Helper.prototype.sort = function(data) {
     if(!Helper.prototype.isValidData(data)) {
         return data;
@@ -103,9 +85,7 @@ function comparator(a, b) {
     return 1;
 }
 
-/*--------------------------------------------------------*/
-/* Sum values of fields in array
-/*--------------------------------------------------------*/
+// Sum values of fields in array
 Helper.prototype.sum = function(data) {
     return sum(data);
 };

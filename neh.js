@@ -2,17 +2,13 @@ var util = require('util');
 var Flowshop = require('./flowshop');
 var Helper = require('./helper.js');
 
-/*--------------------------------------------------------*/
-/* NEH algorithm by Nawaz, Enscore, Ham
-/*--------------------------------------------------------*/
+// NEH algorithm by Nawaz, Enscore, Ham
 function NEH() {
 }
 util.inherits(NEH, Flowshop);
 exports.makespan = NEH.prototype.makespan;
 
-/*--------------------------------------------------------*/
-/* NEH heuristic
-/*--------------------------------------------------------*/
+// NEH heuristic
 NEH.prototype.order = function(data, initialSeed) {
     var pi = Helper.sort(data);
     var neh = [Helper.get(pi, 1), Helper.get(pi, 2)];
