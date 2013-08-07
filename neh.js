@@ -15,7 +15,7 @@ NEH.prototype.order = function(data, initialSeed) {
     if(Helper.makespan(neh) > Helper.makespan(Helper.toggle(neh, 1, 2))) {
         neh = Helper.toggle(neh, 1, 2);
     }
-    for(var i = 3; i < pi.length + 1; i++) {
+    for(var i = 3; i <= pi.length; i++) {
         var sequence = Helper.insertBefore(neh, 1, Helper.get(pi, i));
         var value = Helper.makespan(sequence);
         var minSequence = sequence;
