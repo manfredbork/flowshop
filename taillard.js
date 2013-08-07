@@ -49,8 +49,14 @@ function parseFiles(path) {
         var rawData = parseFile( fs.readFileSync(path + fileList[i]).toString() );
         for(var j = 0; j < rawData.length; j++) {
             if(j === nextHeaderData) {
+                var name = 'ta';
+                if(counter > 0) {
+                    name = name + fillWithZeros('' + counter, 3);
+                } else {
+                    name = 'custom';
+                }
                 tempData = {
-                    name: 'ta' + fillWithZeros('' + counter, 3),
+                    name: name,
                     data: [],
                     numberOfJobs: rawData[j][0],
                     numberOfMachines: rawData[j][1],
@@ -93,5 +99,5 @@ function counterByFileName(fileName) {
         'tai200_20.txt': 101,
         'tai500_20.txt': 111
     };
-    return map[fileName] || '';
+    return map[fileName] || 0;
 }
