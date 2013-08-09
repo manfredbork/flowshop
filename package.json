@@ -3,10 +3,10 @@
     "version": "0.0.1",
     "description": "Framework for Permutation Flow Shop Scheduling Problems",
     "keywords" : ["flowshop", "scheduling", "pfsp", "fsp"],
-    "main": "flowshop.js",
+    "main": "./flowshop",
     "repository": {
         "type": "git",
-        "url": "git://github.com/rhinebytes/flowshop.git"
+        "url": "git://github.com/manfredbork/flowshop.git"
     },
     "author": {
         "name": "Manfred Bork",
