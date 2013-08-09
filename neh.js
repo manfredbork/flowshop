@@ -9,7 +9,7 @@ util.inherits(NEH, Flowshop);
 exports.makespan = NEH.prototype.makespan;
 
 // NEH heuristic
-NEH.prototype.order = function(data, initialSeed) {
+NEH.prototype.order = function(data) {
     var pi = Helper.sort(data);
     var neh = [Helper.get(pi, 1), Helper.get(pi, 2)];
     if(Helper.makespan(neh) > Helper.makespan(Helper.toggle(neh, 1, 2))) {

@@ -6,11 +6,11 @@ function Flowshop() {
 module.exports = Flowshop;
 
 // Implementing algorithm should not overwrite makespan
-Flowshop.prototype.makespan = function(data, initialSeed) {
-    return Helper.makespan(this.order(data, initialSeed));
+Flowshop.prototype.makespan = function(data) {
+    return Helper.makespan(this.order(data));
 };
 
 // Implementing algorithm should overwrite order
-Flowshop.prototype.order = function(data, initialSeed) {
+Flowshop.prototype.order = function(data) {
     return data;
 };
