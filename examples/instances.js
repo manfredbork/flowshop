@@ -1,6 +1,6 @@
 var instances = require('./../taillard');
-var NEH = require('./../neh');
 var seed = require('./../seed-random');
+var NEH = require('./../neh');
 
 // Iterate over filtered Taillard instances
 var filteredInstances = instances.filter(50, 20);
