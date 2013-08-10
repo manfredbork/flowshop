@@ -5,11 +5,11 @@ var Timer = require('./../timer');
 var NEH = require('./../neh');
 var IG = require('./../ig');
 
-// Reset timer
-Timer.reset();
-
 // Filter Taillard instances by parameter jobs and machines
 var filteredInstances = instances.filter(500, 20);
+
+// Reset timer
+Timer.reset();
 
 // Iterate over filtered instances
 for(var i = 0; i < filteredInstances.length; i++) {
