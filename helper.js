@@ -10,6 +10,12 @@ exports.T = Helper.prototype.T;
 Helper.prototype.d = [2, 3, 4, 5, 6, 7, 8];
 exports.d = Helper.prototype.d;
 
+// Relative percentage deviation
+Helper.prototype.RPD = function(some, best) {
+    return ((some - best) / best) * 100;
+};
+exports.RPD = Helper.prototype.RPD;
+
 // Check if data is two dimensional array
 Helper.prototype.isValidData = function(data) {
     return data && data.length > 0 && (data[data.length - 1] || []).length > 0;
