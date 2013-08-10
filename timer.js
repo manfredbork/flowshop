@@ -1,20 +1,24 @@
-// Timer to measure processing time
+// Timer to measure elapsed time
 function Timer() {
 }
 
-// Start timer
-Timer.prototype.start = function() {
+// Reset timer
+Timer.prototype.reset = function() {
     Timer.prototype.time = process.hrtime();
 };
-exports.start = Timer.prototype.start;
+exports.reset = Timer.prototype.reset;
 
-// Measure difference from start
-Timer.prototype.diff = function() {
+// Measure time between last call and now
+Timer.prototype.diff = function(digits) {
     if(Timer.prototype.time && Timer.prototype.time.length == 2) {
         var start = +(Timer.prototype.time.join('.'));
         var now = +(process.hrtime().join('.'));
         Timer.prototype.time = process.hrtime();
-        return now - start;
+        if(digits) {
+            return Math.floor((now - start) * Math.pow(10, digits)) / Math.pow(10, digits);
+        } else {
+            return now - start;
+        }
     } else {
         Timer.prototype.start();
         return 0.0;

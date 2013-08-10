@@ -11,10 +11,15 @@ Helper.prototype.d = [2, 3, 4, 5, 6, 7, 8];
 exports.d = Helper.prototype.d;
 
 // Relative percentage deviation
-Helper.prototype.RPD = function(some, best) {
-    return ((some - best) / best) * 100;
+Helper.prototype.rpd = function(some, best, digits) {
+    var deviation = ((some - best) / best) * 100;
+    if(digits) {
+        return Math.floor(deviation * Math.pow(10, digits)) / Math.pow(10, digits);
+    } else {
+        return deviation;
+    }
 };
-exports.RPD = Helper.prototype.RPD;
+exports.rpd = Helper.prototype.rpd;
 
 // Check if data is two dimensional array
 Helper.prototype.isValidData = function(data) {
