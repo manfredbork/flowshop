@@ -1,4 +1,4 @@
-// Helper functions related to PFSP
+// Helper library related to PFSP
 function Helper() {
 }
 
