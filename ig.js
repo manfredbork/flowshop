@@ -28,8 +28,8 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
             var random = Math.floor((Math.random() * pi.length)) + 1;
             var item = Helper.get(pi, random);
             var pos = Helper.position(sequence, item);
-            for(var j = pos; j < piBest.length; j++) {
-                sequence = Helper.toggle(sequence, j, j + 1);
+            for(var i = pos; i < piBest.length; i++) {
+                sequence = Helper.toggle(sequence, i, i + 1);
                 value = Helper.makespan(sequence);
                 if(value < minValue) {
                     minSequence = sequence;
@@ -37,8 +37,8 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
                 }
             }
             sequence = Helper.toggle(sequence, piBest.length, 1);
-            for(var k = 1; k < pos - 1; k++) {
-                sequence = Helper.toggle(sequence, k, k + 1);
+            for(var j = 1; j < pos - 1; j++) {
+                sequence = Helper.toggle(sequence, j, j + 1);
                 value = Helper.makespan(sequence);
                 if(value < minValue) {
                     minSequence = sequence;
