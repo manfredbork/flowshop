@@ -1,4 +1,4 @@
-// Collection of helper functions
+// Helper functions related to FSP
 function Helper() {
 }
 
@@ -8,7 +8,7 @@ Helper.prototype.isValidData = function(data) {
 };
 exports.isValidData = Helper.prototype.isValidData;
 
-// Basic makespan implementation
+// Makespan implementation
 Helper.prototype.makespan = function(data) {
     if(!Helper.prototype.isValidData(data)) {
         return 0;
@@ -23,6 +23,22 @@ Helper.prototype.makespan = function(data) {
     return grid[data.length - 1][data[data.length - 1].length - 1];
 };
 exports.makespan = Helper.prototype.makespan;
+
+// Temperature implementation
+Helper.prototype.sum = function(data, T) {
+    var total = 0;
+    for(var i = 0; i < data.length; i++) {
+        total = total + Helper.prototype.sum(data[i]);
+    }
+    return T * (total / (data.length * data[data.length - 1].length * 10));
+};
+exports.temperature = Helper.prototype.temperature;
+
+// Termination criterion implementation
+Helper.prototype.criterion = function(data, ms) {
+    return data.length * (data[data.length - 1].length / 2) * ms;
+};
+exports.criterion = Helper.prototype.criterion;
 
 // Toggle specified values in array
 Helper.prototype.toggle = function(data, firstPosition, secondPosition) {
