@@ -1,7 +1,11 @@
 var instances = require('./../taillard');
 var seed = require('./../seed-random');
+var timer = require('./../timer');
 var NEH = require('./../neh');
 var IG = require('./../ig');
+
+// Start timer
+timer.start();
 
 // Iterate over filtered Taillard instances
 var filteredInstances = instances.filter(500, 20);
@@ -21,3 +25,5 @@ for(var i = 0; i < filteredInstances.length; i++) {
     console.log('__________________________________________________');
 
 }
+
+console.log('Time elapsed: ' + timer.diff() + ' seconds');
