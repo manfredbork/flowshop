@@ -69,6 +69,27 @@ Helper.prototype.get = function(data, position) {
 };
 exports.get = Helper.prototype.get;
 
+// Get position of item in array
+Helper.prototype.position = function(data, item) {
+    for(var i = 0; i < data.length; i++) {
+        var compareItem = Helper.prototype.get(data, i + 1);
+        if(Helper.prototype.equal(item, compareItem)) {
+            return i + 1;
+        }
+    }
+    return 0;
+};
+exports.position = Helper.prototype.position;
+
+// Check if two arrays are equal
+Helper.prototype.equal = function(a, b) {
+    if(a && b && a.length && b.length) {
+        return a.join('') === b.join('');
+    }
+    return false;
+};
+exports.equal = Helper.prototype.equal;
+
 // Sort data in descending order
 Helper.prototype.sort = function(data) {
     if(!Helper.prototype.isValidData(data)) {

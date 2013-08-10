@@ -1,9 +1,10 @@
 var instances = require('./../taillard');
 var seed = require('./../seed-random');
 var NEH = require('./../neh');
+var IG = require('./../ig');
 
 // Iterate over filtered Taillard instances
-var filteredInstances = instances.filter(50, 20);
+var filteredInstances = instances.filter(500, 20);
 for(var i = 0; i < filteredInstances.length; i++) {
 
     // Overwrite Math.random by number generator with seed
@@ -16,6 +17,7 @@ for(var i = 0; i < filteredInstances.length; i++) {
     console.log('        lower bound:', filteredInstances[i].lowerBound);
     console.log('        upper bound:', filteredInstances[i].upperBound);
     console.log('       NEH makespan:', NEH.makespan(filteredInstances[i].data));
+    console.log('        IG makespan:', IG.makespan(filteredInstances[i].data));
     console.log('__________________________________________________');
 
 }

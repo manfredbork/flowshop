@@ -20,7 +20,7 @@ NEH.prototype.order = function(data) {
         var value = Helper.makespan(sequence);
         var minSequence = sequence;
         var minValue = value;
-        for(var j = 1; j < neh.length + 1; j++) {
+        for(var j = 1; j <= neh.length; j++) {
             sequence = Helper.toggle(sequence, j, j + 1);
             value = Helper.makespan(sequence);
             if(value < minValue) {
