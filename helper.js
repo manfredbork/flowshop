@@ -2,6 +2,14 @@
 function Helper() {
 }
 
+// T parameter
+Helper.prototype.T = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5];
+exports.T = Helper.prototype.T;
+
+// d parameter
+Helper.prototype.d = [2, 3, 4, 5, 6, 7, 8];
+exports.d = Helper.prototype.d;
+
 // Check if data is two dimensional array
 Helper.prototype.isValidData = function(data) {
     return data && data.length > 0 && (data[data.length - 1] || []).length > 0;
@@ -39,18 +47,6 @@ Helper.prototype.criterion = function(data, ms) {
     return data.length * (data[data.length - 1].length / 2) * ms;
 };
 exports.criterion = Helper.prototype.criterion;
-
-// Return parameter T by level
-Helper.prototype.T = function(level) {
-    return [0.0, 0.1, 0.2, 0.3, 0.4, 0.5][level - 1];
-};
-exports.T = Helper.prototype.T;
-
-// Return parameter d by level
-Helper.prototype.d = function(level) {
-    return [2, 3, 4, 5, 6, 7, 8][level - 1];
-};
-exports.d = Helper.prototype.d;
 
 // Toggle specified values in array
 Helper.prototype.toggle = function(data, firstPosition, secondPosition) {
