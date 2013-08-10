@@ -16,6 +16,18 @@ Taillard.prototype.filter = function(jobs, machines) {
 };
 exports.filter = Taillard.prototype.filter;
 
+// Get Taillard instance by name
+Taillard.prototype.get = function(name) {
+    var data = parseFiles('taillard/');
+    for(var i = 0; i < data.length; i++) {
+        if(data[i].name === name) {
+            return data[i];
+        }
+    }
+    return [];
+};
+exports.get = Taillard.prototype.get;
+
 function parseLine(line) {
     var finalValues = [], rawValues = line.split(/\s{1,}/g);
     for(var i = 0; i < rawValues.length; i++) {
