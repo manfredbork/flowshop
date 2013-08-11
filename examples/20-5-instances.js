@@ -6,7 +6,7 @@ var NEH = require('./../neh');
 var IG = require('./../ig');
 
 // Filter Taillard instances by jobs and machines
-var filteredInstances = instances.filter(500, 20);
+var filteredInstances = instances.filter(20, 5);
 
 // Reset timer
 Timer.reset();

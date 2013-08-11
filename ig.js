@@ -102,7 +102,7 @@ IG.prototype.order = function(data) {
 
         // Destruction phase
         pi$ = [].concat(pi);
-        for(var i = 1; i <= IG.prototype.d; i++) {
+        for(var i = 1; i <= Math.min(IG.prototype.d, pi$.length); i++) {
             random = Math.floor((Math.random() * pi$.length)) + 1;
             item = Helper.get(pi$, random);
             pi$ = Helper.remove(pi$, random);
@@ -110,7 +110,7 @@ IG.prototype.order = function(data) {
         }
 
         // Construction phase
-        for(var j = 1; j <= IG.prototype.d; j++) {
+        for(var j = 1; j <= piR.length; j++) {
             sequence = Helper.insertBefore(pi$, 1, Helper.get(piR, j));
             value = Helper.makespan(sequence);
             minSequence = sequence;
