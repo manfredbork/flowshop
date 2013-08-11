@@ -27,14 +27,14 @@ for(var i = 0; i < filteredInstances.length; i++) {
     console.log('        LOWER BOUND:', filteredInstances[i].lowerBound);
     console.log('        UPPER BOUND:', filteredInstances[i].upperBound);
 
-    var makespanNEH = NEH.makespan(filteredInstances[i].data);
-    var makespanIG = IG.makespan(filteredInstances[i].data);
+    var orderedNEH = NEH.order(filteredInstances[i].data);
+    var orderedIG = IG.order(filteredInstances[i].data);
 
-    console.log('       NEH MAKESPAN:', makespanNEH);
-    console.log('        IG MAKESPAN:', makespanIG);
-    console.log('         RPD NEH UB:', Helper.rpd(makespanNEH, filteredInstances[i].upperBound, 2) + '%');
-    console.log('          RPD IG UB:', Helper.rpd(makespanIG, filteredInstances[i].upperBound, 2) + '%');
-    console.log('         RPD IG NEH:', Helper.rpd(makespanIG, makespanNEH, 2) + '%');
+    console.log('       NEH MAKESPAN:', NEH.makespan(orderedNEH));
+    console.log('        IG MAKESPAN:', IG.makespan(orderedIG));
+    console.log('         RPD NEH UB:', Helper.rpd(NEH.makespan(orderedNEH), filteredInstances[i].upperBound, 2) + '%');
+    console.log('          RPD IG UB:', Helper.rpd(IG.makespan(orderedIG), filteredInstances[i].upperBound, 2) + '%');
+    console.log('         RPD IG NEH:', Helper.rpd(IG.makespan(orderedIG), NEH.makespan(orderedNEH), 2) + '%');
     console.log('       TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
     console.log('______________________________________________________________');
 

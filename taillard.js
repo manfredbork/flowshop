@@ -29,9 +29,9 @@ Taillard.prototype.get = function(name) {
 exports.get = Taillard.prototype.get;
 
 function parseLine(line) {
-    var finalValues = [], rawValues = line.split(/\s{1,}/g);
+    var finalValues = [], rawValues = line.split(/[a-zA-Z:, ]+/);
     for(var i = 0; i < rawValues.length; i++) {
-        var eachValue = Number(rawValues[i]);
+        var eachValue = +(rawValues[i]);
         if(eachValue > 0) {
             finalValues.push(eachValue);
         }
@@ -53,14 +53,15 @@ function parseFile(file) {
 function parseFiles(path) {
     var finalData = [], fileList = fs.readdirSync(path);
     for(var i = 0; i < fileList.length; i++) {
-        var counter = counterByFileName(fileList[i]);
         var tempData = {
             data: []
         };
+        var counter = counterByFileName(fileList[i]);
         var nextHeaderData = 0;
         var rawData = parseFile( fs.readFileSync(path + fileList[i]).toString() );
-        for(var j = 0; j < rawData.length; j++) {
-            if(j === nextHeaderData) {
+        var j = 0;
+        for(var k = 0; k < rawData.length; k++) {
+            if(k === nextHeaderData) {
                 var name = 'ta';
                 if(counter > 0) {
                     name = name + fillWithZeros('' + counter, 3);
@@ -70,19 +71,27 @@ function parseFiles(path) {
                 tempData = {
                     name: name,
                     data: [],
-                    numberOfJobs: rawData[j][0],
-                    numberOfMachines: rawData[j][1],
-                    initialSeed: rawData[j][2],
-                    upperBound: rawData[j][3],
-                    lowerBound: rawData[j][4]
+                    numberOfJobs: rawData[k][0],
+                    numberOfMachines: rawData[k][1],
+                    initialSeed: rawData[k][2],
+                    upperBound: rawData[k][3],
+                    lowerBound: rawData[k][4]
                 };
                 nextHeaderData = nextHeaderData + tempData.numberOfMachines + 1;
-                finalData.push(tempData);
                 if(counter > 0) {
                     counter++;
                 }
+            } else if(k === nextHeaderData - 1) {
+                finalData.push(tempData);
+                j = 0;
             } else {
-                tempData.data.push(rawData[j]);
+                for(var l = 0; l < rawData[k].length; l++) {
+                    if(!tempData.data[l]) {
+                        tempData.data[l] = [];
+                    }
+                    tempData.data[l][j] = rawData[k][l];
+                }
+                j = j + 1;
             }
         }
     }

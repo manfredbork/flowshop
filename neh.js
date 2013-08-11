@@ -7,11 +7,13 @@ function NEH() {
 }
 util.inherits(NEH, Flowshop);
 exports.makespan = NEH.prototype.makespan;
+exports.permutation = NEH.prototype.permutation;
 
 // NEH heuristic
 NEH.prototype.order = function(data) {
     var sequence, value, minSequence, minValue;
     var pi = Helper.sort(data);
+    var pi$ = [].concat(data);
     var neh = [Helper.get(pi, 1), Helper.get(pi, 2)];
     if(Helper.makespan(neh) > Helper.makespan(Helper.toggle(neh, 1, 2))) {
         neh = Helper.toggle(neh, 1, 2);
@@ -29,7 +31,11 @@ NEH.prototype.order = function(data) {
                 minValue = value;
             }
         }
-        neh = minSequence;
+        if(minSequence < Helper.makespan(pi$)) {
+            neh = minSequence;
+        } else {
+            neh = pi$;
+        }
     }
     return neh;
 };
