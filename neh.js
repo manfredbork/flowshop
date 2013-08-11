@@ -35,6 +35,8 @@ NEH.prototype.order = function(data) {
             neh = minSequence;
         } else {
             neh = pi$;
+            minSequence = pi$;
+            minValue = Helper.makespan(pi$);
         }
     }
     return neh;
