@@ -19,7 +19,7 @@ Timer.prototype.diff = function(reset) {
         return Math.floor(now - start);
     } else {
         Timer.prototype.start();
-        return 0.0;
+        return 0;
     }
 };
 exports.diff = Timer.prototype.diff;
