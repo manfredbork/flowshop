@@ -32,7 +32,7 @@ NEH.prototype.order = function(data) {
         }
         neh = minSequence;
     }
-    if(Helper.makespan(pi$) < neh) {
+    if(Helper.makespan(pi$) < Helper.makespan(neh)) {
         neh = pi$;
     }
     return neh;
