@@ -81,9 +81,6 @@ function parseFiles(path) {
                 if(counter > 0) {
                     counter++;
                 }
-            } else if(k === nextHeaderData - 1) {
-                finalData.push(tempData);
-                j = 0;
             } else {
                 for(var l = 0; l < rawData[k].length; l++) {
                     if(!tempData.data[l]) {
@@ -92,6 +89,10 @@ function parseFiles(path) {
                     tempData.data[l][j] = rawData[k][l];
                 }
                 j = j + 1;
+                if(k === nextHeaderData - 1) {
+                    finalData.push(tempData);
+                    j = 0;
+                }
             }
         }
     }
