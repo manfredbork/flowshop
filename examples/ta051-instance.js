@@ -11,6 +11,8 @@ var ta051 = instances.get('ta051');
 // Reset timer
 Timer.reset();
 
+console.log('PROCESSING...');
+
 var initialSeed = ta051.initialSeed;
 
 // Overwrite Math.random by number generator with seed

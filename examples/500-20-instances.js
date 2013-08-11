@@ -11,6 +11,8 @@ var filteredInstances = instances.filter(500, 20);
 // Reset timer
 Timer.reset();
 
+console.log('PROCESSING...');
+
 // Iterate over filtered instances
 for(var i = 0; i < filteredInstances.length; i++) {
 
