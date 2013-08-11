@@ -33,5 +33,5 @@ console.log('       NEH MAKESPAN:', NEH.makespan(ta051.data));
 console.log('        IG MAKESPAN:', IG.makespan(ta051.data));
 console.log('         RPD NEH IG:', Helper.rpd(makespanNEH, makespanIG, 2) + '%');
 console.log('          RPD IG UB:', Helper.rpd(makespanIG, ta051.upperBound, 2) + '%');
-console.log('       TIME ELAPSED:', Timer.diff(true, 2) + ' SECS');
+console.log('       TIME ELAPSED:', Timer.diff(true) + ' MS');
 console.log('______________________________________________________________');
