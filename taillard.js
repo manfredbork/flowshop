@@ -20,7 +20,7 @@ exports.filter = Taillard.prototype.filter;
 Taillard.prototype.get = function(name) {
     var data = parseFiles('taillard/');
     for(var i = 0; i < data.length; i++) {
-        if(data[i].name === name) {
+        if(name !== 'custom' && data[i].name === name) {
             return data[i];
         }
     }
