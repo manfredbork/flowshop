@@ -39,7 +39,7 @@ Helper.prototype.makespan = function(data) {
             grid[i][j] = Math.max((grid[i - 1] || [])[j] || 0, (grid[i] || [])[j - 1] || 0) + data[i][j];
         }
     }
-    return grid[data.length - 1][data[data.length - 1].length - 1];
+    return grid[grid.length - 1][grid[grid.length - 1].length - 1];
 };
 exports.makespan = Helper.prototype.makespan;
 
