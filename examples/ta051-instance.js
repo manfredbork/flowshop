@@ -31,6 +31,5 @@ console.log('       NEH MAKESPAN:', NEH.makespan(orderedNEH));
 console.log('        IG MAKESPAN:', IG.makespan(orderedIG));
 console.log('         RPD NEH UB:', Helper.rpd(NEH.makespan(orderedNEH), ta051.upperBound, 2) + '%');
 console.log('          RPD IG UB:', Helper.rpd(IG.makespan(orderedIG), ta051.upperBound, 2) + '%');
-console.log('         RPD IG NEH:', Helper.rpd(IG.makespan(orderedIG), NEH.makespan(orderedNEH), 2) + '%');
 console.log('       TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
 console.log('______________________________________________________________');
