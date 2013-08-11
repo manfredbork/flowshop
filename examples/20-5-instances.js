@@ -34,6 +34,7 @@ for(var i = 0; i < filteredInstances.length; i++) {
     console.log('        IG MAKESPAN:', makespanIG);
     console.log('         RPD NEH UB:', Helper.rpd(makespanNEH, filteredInstances[i].upperBound, 2) + '%');
     console.log('          RPD IG UB:', Helper.rpd(makespanIG, filteredInstances[i].upperBound, 2) + '%');
+    console.log('         RPD IG NEH:', Helper.rpd(makespanIG, makespanNEH, 2) + '%');
     console.log('       TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
     console.log('______________________________________________________________');
 
