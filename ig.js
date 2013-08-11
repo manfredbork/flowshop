@@ -14,7 +14,7 @@ exports.makespan = IG.prototype.makespan;
 IG.prototype.setCriterionMilliseconds = function(ms) {
     IG.prototype.criterionMilliseconds = ms;
 };
-IG.prototype.criterionMilliseconds = 20;
+IG.prototype.criterionMilliseconds = 60;
 exports.setCriterionMilliseconds = IG.prototype.setCriterionMilliseconds;
 
 // Set T parameter by level
