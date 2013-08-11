@@ -45,18 +45,18 @@ IG.prototype.initializationNEH = function(data) {
 IG.prototype.iterativeImprovementInsertion = function(pi) {
     var sequence, value, minSequence, minValue, random, position;
     var pi$ = [].concat(pi);
-    var piBest = [].concat(pi);
+    var piB = [].concat(pi);
     var improve = true;
     while(improve) {
         improve = false;
-        sequence = [].concat(piBest);
+        sequence = [].concat(piB);
         value = Helper.makespan(sequence);
         minSequence = sequence;
         minValue = value;
         while(pi$.length > 0) {
             random = Math.floor((Math.random() * pi$.length)) + 1;
             position = Helper.position(sequence, Helper.get(pi$, random));
-            for(var i = position; i < piBest.length; i++) {
+            for(var i = position; i < piB.length; i++) {
                 sequence = Helper.toggle(sequence, i, i + 1);
                 value = Helper.makespan(sequence);
                 if(value < minValue) {
@@ -64,7 +64,7 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
                     minValue = value;
                 }
             }
-            sequence = Helper.toggle(sequence, piBest.length, 1);
+            sequence = Helper.toggle(sequence, piB.length, 1);
             value = Helper.makespan(sequence);
             minSequence = sequence;
             minValue = value;
@@ -76,20 +76,20 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
                     minValue = value;
                 }
             }
-            if(Helper.makespan(minSequence) < Helper.makespan(piBest)) {
-                piBest = minSequence;
+            if(Helper.makespan(minSequence) < Helper.makespan(piB)) {
+                piB = minSequence;
                 improve = true;
             }
             pi$ = Helper.remove(pi$, random);
         }
     }
-    return piBest;
+
+    return piB;
 };
 
 // Iterated Greedy heuristic
 IG.prototype.order = function(data) {
-    var pi, piB, pi$, pi$$, random, item, sequence, value, minSequence, minValue;
-    var piR = [];
+    var pi, piB, piR, pi$, pi$$, random, item, sequence, value, minSequence, minValue;
     var temperature = Helper.temperature(data, IG.prototype.T);
     var criterion = Helper.criterion(data, IG.prototype.criterionMilliseconds);
 
@@ -105,6 +105,7 @@ IG.prototype.order = function(data) {
     while(Timer.diff(false) < criterion) {
 
         // Destruction phase
+        piR = [];
         pi$ = [].concat(pi);
         for(var i = 1; i <= Math.min(IG.prototype.d, pi$.length); i++) {
             random = Math.floor((Math.random() * pi$.length)) + 1;
@@ -119,7 +120,7 @@ IG.prototype.order = function(data) {
             value = Helper.makespan(sequence);
             minSequence = sequence;
             minValue = value;
-            for(var k = 1; k < piR; k++) {
+            for(var k = 1; k < piR.length; k++) {
                 sequence = Helper.toggle(sequence, j, j + 1);
                 value = Helper.makespan(sequence);
                 if(value < minValue) {
