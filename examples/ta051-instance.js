@@ -5,10 +5,6 @@ var Timer = require('./../timer');
 var NEH = require('./../neh');
 var IG = require('./../ig');
 
-// Set IG parameter by level
-IG.setT(1);
-IG.setd(1);
-
 // Get Taillard instance by name
 var ta051 = instances.get('ta051');
 
@@ -29,9 +25,9 @@ console.log('        UPPER BOUND:', ta051.upperBound);
 var makespanNEH = NEH.makespan(ta051.data);
 var makespanIG = IG.makespan(ta051.data);
 
-console.log('       NEH MAKESPAN:', NEH.makespan(ta051.data));
-console.log('        IG MAKESPAN:', IG.makespan(ta051.data));
+console.log('       NEH MAKESPAN:', makespanNEH);
+console.log('        IG MAKESPAN:', makespanIG);
 console.log('         RPD NEH IG:', Helper.rpd(makespanNEH, makespanIG, 2) + '%');
 console.log('          RPD IG UB:', Helper.rpd(makespanIG, ta051.upperBound, 2) + '%');
-console.log('       TIME ELAPSED:', Timer.diff(true) + ' MS');
+console.log('       TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
 console.log('______________________________________________________________');

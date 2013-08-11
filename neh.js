@@ -1,6 +1,6 @@
 var util = require('util');
 var Flowshop = require('./flowshop');
-var Helper = require('./helper.js');
+var Helper = require('./helper');
 
 // NEH algorithm by Nawaz, Enscore, Ham
 function NEH() {
@@ -10,16 +10,17 @@ exports.makespan = NEH.prototype.makespan;
 
 // NEH heuristic
 NEH.prototype.order = function(data) {
+    var sequence, value, minSequence, minValue;
     var pi = Helper.sort(data);
     var neh = [Helper.get(pi, 1), Helper.get(pi, 2)];
     if(Helper.makespan(neh) > Helper.makespan(Helper.toggle(neh, 1, 2))) {
         neh = Helper.toggle(neh, 1, 2);
     }
     for(var i = 3; i <= pi.length; i++) {
-        var sequence = Helper.insertBefore(neh, 1, Helper.get(pi, i));
-        var value = Helper.makespan(sequence);
-        var minSequence = sequence;
-        var minValue = value;
+        sequence = Helper.insertBefore(neh, 1, Helper.get(pi, i));
+        value = Helper.makespan(sequence);
+        minSequence = sequence;
+        minValue = value;
         for(var j = 1; j <= neh.length; j++) {
             sequence = Helper.toggle(sequence, j, j + 1);
             value = Helper.makespan(sequence);

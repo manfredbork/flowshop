@@ -28,11 +28,11 @@ for(var i = 0; i < filteredInstances.length; i++) {
     var makespanNEH = NEH.makespan(filteredInstances[i].data);
     var makespanIG = IG.makespan(filteredInstances[i].data);
 
-    console.log('       NEH MAKESPAN:', NEH.makespan(filteredInstances[i].data));
-    console.log('        IG MAKESPAN:', IG.makespan(filteredInstances[i].data));
+    console.log('       NEH MAKESPAN:', makespanNEH);
+    console.log('        IG MAKESPAN:', makespanIG);
     console.log('         RPD NEH IG:', Helper.rpd(makespanNEH, makespanIG, 2) + '%');
     console.log('          RPD IG UB:', Helper.rpd(makespanIG, filteredInstances[i].upperBound, 2) + '%');
-    console.log('       TIME ELAPSED:', Timer.diff(true) + ' MS');
+    console.log('       TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
     console.log('______________________________________________________________');
 
 }

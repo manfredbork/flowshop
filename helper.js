@@ -23,7 +23,7 @@ exports.rpd = Helper.prototype.rpd;
 
 // Check if data is two dimensional array
 Helper.prototype.isValidData = function(data) {
-    return data && data.length > 0 && (data[data.length - 1] || []).length > 0;
+    return (data && data.length === 0) || (data && data.length > 0 && (data[data.length - 1] || []).length > 0);
 };
 exports.isValidData = Helper.prototype.isValidData;
 
@@ -91,6 +91,9 @@ exports.insertAfter = Helper.prototype.insertAfter;
 
 // Insert value before specified field in array
 Helper.prototype.insertBefore = function(data, position, value) {
+    if(!Helper.prototype.isValidData(data)) {
+        return data;
+    }
     return Helper.prototype.insertAfter(data, position - 1, value);
 };
 exports.insertBefore = Helper.prototype.insertBefore;
