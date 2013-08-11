@@ -83,7 +83,6 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
             pi$ = Helper.remove(pi$, random);
         }
     }
-
     return piB;
 };
 
@@ -144,7 +143,6 @@ IG.prototype.order = function(data) {
         }
 
     }
-
     return piB;
 };
 exports.order = IG.prototype.order;

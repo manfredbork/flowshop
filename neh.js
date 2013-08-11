@@ -35,7 +35,6 @@ NEH.prototype.order = function(data) {
     if(Helper.makespan(pi$) < neh) {
         neh = pi$;
     }
-
     return neh;
 };
 exports.order = NEH.prototype.order;
