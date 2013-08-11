@@ -9,7 +9,6 @@ function IG() {
 }
 util.inherits(IG, Flowshop);
 exports.makespan = IG.prototype.makespan;
-exports.permutation = IG.prototype.permutation;
 
 // Set criterion milliseconds
 IG.prototype.setCriterionMilliseconds = function(ms) {

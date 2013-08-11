@@ -7,7 +7,6 @@ function NEH() {
 }
 util.inherits(NEH, Flowshop);
 exports.makespan = NEH.prototype.makespan;
-exports.permutation = NEH.prototype.permutation;
 
 // NEH heuristic
 NEH.prototype.order = function(data) {
