@@ -44,6 +44,7 @@ IG.prototype.initializationNEH = function(data) {
 // Iterative improvement insertion
 IG.prototype.iterativeImprovementInsertion = function(pi) {
     var sequence, value, minSequence, minValue, random, position;
+    var pi$ = [].concat(pi);
     var piBest = [].concat(pi);
     var improve = true;
     while(improve) {
@@ -52,9 +53,9 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
         value = Helper.makespan(sequence);
         minSequence = sequence;
         minValue = value;
-        while(pi.length > 0) {
-            random = Math.floor((Math.random() * pi.length)) + 1;
-            position = Helper.position(sequence, Helper.get(pi, random));
+        while(pi$.length > 0) {
+            random = Math.floor((Math.random() * pi$.length)) + 1;
+            position = Helper.position(sequence, Helper.get(pi$, random));
             for(var i = position; i < piBest.length; i++) {
                 sequence = Helper.toggle(sequence, i, i + 1);
                 value = Helper.makespan(sequence);
@@ -64,6 +65,9 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
                 }
             }
             sequence = Helper.toggle(sequence, piBest.length, 1);
+            value = Helper.makespan(sequence);
+            minSequence = sequence;
+            minValue = value;
             for(var j = 1; j < position - 1; j++) {
                 sequence = Helper.toggle(sequence, j, j + 1);
                 value = Helper.makespan(sequence);
@@ -76,7 +80,7 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
                 piBest = minSequence;
                 improve = true;
             }
-            pi = Helper.remove(pi, random);
+            pi$ = Helper.remove(pi$, random);
         }
     }
     return piBest;
