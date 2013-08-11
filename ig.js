@@ -18,14 +18,14 @@ IG.prototype.criterionMilliseconds = 20;
 exports.setCriterionMilliseconds = IG.prototype.setCriterionMilliseconds;
 
 // Set T parameter by level
-IG.prototype.T = Helper.T[Helper.T.length - 1];
+IG.prototype.T = Helper.T[5];
 IG.prototype.setT = function(level) {
     IG.prototype.T = Helper.T[level - 1];
 };
 exports.setT = IG.prototype.setT;
 
 // Set d parameter by level
-IG.prototype.d = Helper.d[Helper.d.length - 1];
+IG.prototype.d = Helper.d[3];
 IG.prototype.setd = function(level) {
     IG.prototype.d = Helper.d[level - 1];
 };

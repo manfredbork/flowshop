@@ -29,7 +29,7 @@ var makespanIG = IG.makespan(ta051.data);
 
 console.log('       NEH MAKESPAN:', makespanNEH);
 console.log('        IG MAKESPAN:', makespanIG);
-console.log('         RPD NEH IG:', Helper.rpd(makespanNEH, makespanIG, 2) + '%');
+console.log('         RPD NEH UB:', Helper.rpd(makespanNEH, ta051.upperBound, 2) + '%');
 console.log('          RPD IG UB:', Helper.rpd(makespanIG, ta051.upperBound, 2) + '%');
 console.log('       TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
 console.log('______________________________________________________________');
