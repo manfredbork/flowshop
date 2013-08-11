@@ -36,11 +36,6 @@ IG.prototype.initializationNEH = function(data) {
     return NEH.order(data);
 };
 
-// NEH initialization
-IG.prototype.initializationNEH = function(data) {
-    return NEH.order(data);
-};
-
 // Iterative improvement insertion
 IG.prototype.iterativeImprovementInsertion = function(pi) {
     var sequence, value, minSequence, minValue, random, position;
