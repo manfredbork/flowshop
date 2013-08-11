@@ -5,6 +5,10 @@ var Timer = require('./../timer');
 var NEH = require('./../neh');
 var IG = require('./../ig');
 
+// Set IG parameter by level
+IG.setT(1);
+IG.setd(1);
+
 // Get Taillard instance by name
 var ta051 = instances.get('ta051');
 

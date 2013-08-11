@@ -9,6 +9,23 @@ function IG() {
 util.inherits(IG, Flowshop);
 exports.makespan = IG.prototype.makespan;
 
+// Set T parameter by level
+IG.prototype.setT = function(level) {
+    IG.prototype.T = Helper.T[level - 1];
+};
+exports.setT = IG.prototype.setT;
+
+// Set d parameter by level
+IG.prototype.setd = function(level) {
+    IG.prototype.d = Helper.d[level - 1];
+};
+exports.setd = IG.prototype.setd;
+
+// NEH initialization
+IG.prototype.initializationNEH = function(data) {
+    return NEH.order(data);
+};
+
 // NEH initialization
 IG.prototype.initializationNEH = function(data) {
     return NEH.order(data);
