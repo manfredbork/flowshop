@@ -30,14 +30,12 @@ NEH.prototype.order = function(data) {
                 minValue = value;
             }
         }
-        if(minSequence < Helper.makespan(pi$)) {
-            neh = minSequence;
-        } else {
-            neh = pi$;
-            minSequence = pi$;
-            minValue = Helper.makespan(pi$);
-        }
+        neh = minSequence;
     }
+    if(Helper.makespan(pi$) < neh) {
+        neh = pi$;
+    }
+
     return neh;
 };
 exports.order = NEH.prototype.order;
