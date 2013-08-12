@@ -2,68 +2,8 @@
 function Helper() {
 }
 
-// T parameter
-Helper.prototype.T = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5];
-exports.T = Helper.prototype.T;
-
-// d parameter
-Helper.prototype.d = [2, 3, 4, 5, 6, 7, 8];
-exports.d = Helper.prototype.d;
-
-// Relative percentage deviation
-Helper.prototype.rpd = function(some, best, digits) {
-    var deviation = ((some - best) / best) * 100;
-    if(digits) {
-        return Math.floor(deviation * Math.pow(10, digits)) / Math.pow(10, digits);
-    } else {
-        return deviation;
-    }
-};
-exports.rpd = Helper.prototype.rpd;
-
-// Check if data is two dimensional array
-Helper.prototype.isValidData = function(data) {
-    return (data && data.length === 0) || (data && data.length > 0 && (data[data.length - 1] || []).length > 0);
-};
-exports.isValidData = Helper.prototype.isValidData;
-
-// Makespan implementation
-Helper.prototype.makespan = function(data) {
-    if(!Helper.prototype.isValidData(data)) {
-        return 0;
-    }
-    var grid = [];
-    for(var i = 0; i < data.length; i++) {
-        grid[i] = [];
-        for(var j = 0; j < data[i].length ; j++) {
-            grid[i][j] = Math.max((grid[i - 1] || [])[j] || 0, (grid[i] || [])[j - 1] || 0) + data[i][j];
-        }
-    }
-    return grid[grid.length - 1][grid[grid.length - 1].length - 1];
-};
-exports.makespan = Helper.prototype.makespan;
-
-// Temperature implementation
-Helper.prototype.temperature = function(data, T) {
-    var total = 0;
-    for(var i = 0; i < data.length; i++) {
-        total = total + Helper.prototype.sum(data[i]);
-    }
-    return T * (total / (data.length * data[data.length - 1].length * 10));
-};
-exports.temperature = Helper.prototype.temperature;
-
-// Termination criterion implementation
-Helper.prototype.criterion = function(data, ms) {
-    return data.length * (data[data.length - 1].length / 2) * ms;
-};
-exports.criterion = Helper.prototype.criterion;
-
 // Toggle specified values in array
 Helper.prototype.toggle = function(data, firstPosition, secondPosition) {
-    if(!Helper.prototype.isValidData(data)) {
-        return data;
-    }
     var clone = [].concat(data), value = clone[firstPosition - 1];
     clone[firstPosition - 1] = clone[secondPosition - 1];
     clone[secondPosition - 1] = value;
@@ -73,36 +13,24 @@ exports.toggle = Helper.prototype.toggle;
 
 // Remove field in array
 Helper.prototype.remove = function(data, position) {
-    if(!Helper.prototype.isValidData(data)) {
-        return data;
-    }
     return data.slice(0, position - 1).concat(data.slice(position));
 };
 exports.remove = Helper.prototype.remove;
 
 // Insert value after specified field in array
 Helper.prototype.insertAfter = function(data, position, value) {
-    if(!Helper.prototype.isValidData(data)) {
-        return data;
-    }
     return data.slice(0, position).concat([value]).concat(data.slice(position));
 };
 exports.insertAfter = Helper.prototype.insertAfter;
 
 // Insert value before specified field in array
 Helper.prototype.insertBefore = function(data, position, value) {
-    if(!Helper.prototype.isValidData(data)) {
-        return data;
-    }
     return Helper.prototype.insertAfter(data, position - 1, value);
 };
 exports.insertBefore = Helper.prototype.insertBefore;
 
 // Get value from specified field in array
 Helper.prototype.get = function(data, position) {
-    if(!Helper.prototype.isValidData(data)) {
-        return data;
-    }
     return [].concat(data[position - 1]);
 };
 exports.get = Helper.prototype.get;
@@ -119,41 +47,37 @@ Helper.prototype.position = function(data, item) {
 };
 exports.position = Helper.prototype.position;
 
-// Check if two arrays are equal
-Helper.prototype.equal = function(a, b) {
-    if(a && b && a.length && b.length) {
-        return a.join('') === b.join('');
-    }
-    return false;
+// Array equal operator
+Helper.prototype.equal = function(firstData, secondData) {
+    return firstData.join('') === secondData.join('');
 };
 exports.equal = Helper.prototype.equal;
 
+// Clone array
+Helper.prototype.clone = function(data) {
+    return [].concat(data);
+};
+exports.clone = Helper.prototype.clone;
+
 // Sort data in descending order
 Helper.prototype.sort = function(data) {
-    if(!Helper.prototype.isValidData(data)) {
-        return data;
-    }
-    return [].concat(data).sort(comparator);
+    return [].concat(data).sort(
+        function(firstItem, secondItem) {
+            if(Helper.prototype.sum(firstItem) > Helper.prototype.sum(secondItem)) {
+                return -1;
+            }
+            return 1;
+        }
+    );
 };
 exports.sort = Helper.prototype.sort;
 
-function comparator(a, b) {
-    if(sum(a) > sum(b)) {
-        return -1;
-    }
-    return 1;
-}
-
 // Sum values of fields in array
 Helper.prototype.sum = function(data) {
-    return sum(data);
-};
-exports.sum = Helper.prototype.sum;
-
-function sum(data) {
     var sum = 0;
     for(var i = 0; i < (data || []).length; i++) {
         sum = sum + (data[i] || 0);
     }
     return sum;
-}
+};
+exports.sum = Helper.prototype.sum;

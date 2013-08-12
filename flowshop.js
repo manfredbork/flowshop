@@ -1,16 +1,26 @@
-var Helper = require('./helper');
-
 // Implementing algorithm should inherit from Flowshop
 function Flowshop() {
 }
 module.exports = Flowshop;
 
-// Implementing algorithm should not overwrite makespan
+// Relative percentage deviation
+Flowshop.prototype.rpd = function(some, best) {
+    return ((some - best) / best) * 100;
+};
+
+// Makespan implementation
 Flowshop.prototype.makespan = function(data) {
-    return Helper.makespan(data);
+    var grid = [];
+    for(var i = 0; i < data.length; i++) {
+        grid[i] = [];
+        for(var j = 0; j < data[i].length ; j++) {
+            grid[i][j] = Math.max((grid[i - 1] || [])[j] || 0, (grid[i] || [])[j - 1] || 0) + data[i][j];
+        }
+    }
+    return grid[grid.length - 1][grid[grid.length - 1].length - 1];
 };
 
 // Implementing algorithm should overwrite order
-Flowshop.prototype.order = function(data) {
+Flowshop.prototype.apply = function(data) {
     return data;
 };

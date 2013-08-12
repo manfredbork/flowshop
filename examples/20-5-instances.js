@@ -1,9 +1,16 @@
 var instances = require('./../taillard');
 var seed = require('./../seed-random');
-var Helper = require('./../helper');
 var Timer = require('./../timer');
 var NEH = require('./../neh');
 var IG = require('./../ig');
+
+// Relative percentage deviation
+var rpdNEH = 0;
+var rpdIG = 0;
+
+// Number of jobs and machines
+var jobs = 20;
+var machines = 5;
 
 // Filter Taillard instances by jobs and machines
 var filteredInstances = instances.filter(20, 5);
@@ -11,30 +18,30 @@ var filteredInstances = instances.filter(20, 5);
 // Reset timer
 Timer.reset();
 
-console.log('PROCESSING...');
+    console.log('PROCESSING');
+    console.log('______________________________________________________________');
 
 // Iterate over filtered instances
 for(var i = 0; i < filteredInstances.length; i++) {
 
-    var initialSeed = filteredInstances[i].initialSeed;
-
     // Overwrite Math.random by number generator with seed
-    seed(initialSeed, true);
+    seed(filteredInstances[i].initialSeed, true);
 
-    console.log('               NAME:', filteredInstances[i].name);
-    console.log('     NUMBER OF JOBS:', filteredInstances[i].numberOfJobs);
-    console.log(' NUMBER OF MACHINES:', filteredInstances[i].numberOfMachines);
-    console.log('        LOWER BOUND:', filteredInstances[i].lowerBound);
-    console.log('        UPPER BOUND:', filteredInstances[i].upperBound);
+    // Apply algorithms
+    var $NEH = NEH.apply(filteredInstances[i].data);
+    var $IG = IG.apply(filteredInstances[i].data);
 
-    var orderedNEH = NEH.order(filteredInstances[i].data);
-    var orderedIG = IG.order(filteredInstances[i].data);
+    rpdNEH = rpdNEH + NEH.rpd(NEH.makespan($NEH), filteredInstances[i].upperBound);
+    rpdIG = rpdIG + IG.rpd(IG.makespan($IG), filteredInstances[i].upperBound);
 
-    console.log('       NEH MAKESPAN:', NEH.makespan(orderedNEH));
-    console.log('        IG MAKESPAN:', IG.makespan(orderedIG));
-    console.log('         RPD NEH UB:', Helper.rpd(NEH.makespan(orderedNEH), filteredInstances[i].upperBound, 2) + '%');
-    console.log('          RPD IG UB:', Helper.rpd(IG.makespan(orderedIG), filteredInstances[i].upperBound, 2) + '%');
-    console.log('       TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
+    console.log('          NAME:', filteredInstances[i].initialSeed);
+    console.log('  NEH MAKESPAN:', NEH.makespan($NEH));
+    console.log('      MAKESPAN:', IG.makespan($IG));
+    console.log('  TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
     console.log('______________________________________________________________');
 
 }
+
+    console.log('      INSTANCE:', jobs + ' x ' + machines);
+    console.log('       RPD NEH:', rpdNEH / filteredInstances.length + '%');
+    console.log('        RPD IG:', rpdIG / filteredInstances.length + '%');

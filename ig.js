@@ -9,43 +9,50 @@ function IG() {
 }
 util.inherits(IG, Flowshop);
 exports.makespan = IG.prototype.makespan;
+exports.rpd = IG.prototype.rpd;
 
-// Set criterion milliseconds
-IG.prototype.setCriterionMilliseconds = function(ms) {
-    IG.prototype.criterionMilliseconds = ms;
-};
-IG.prototype.criterionMilliseconds = 60;
-exports.setCriterionMilliseconds = IG.prototype.setCriterionMilliseconds;
+// T parameter
+IG.prototype.T = 0.4;
+exports.T = IG.prototype.T;
 
-// Set T parameter by level
-IG.prototype.T = Helper.T[5];
-IG.prototype.setT = function(level) {
-    IG.prototype.T = Helper.T[level - 1];
-};
-exports.setT = IG.prototype.setT;
+// d parameter
+IG.prototype.d = 4;
+exports.d = IG.prototype.d;
 
-// Set d parameter by level
-IG.prototype.d = Helper.d[3];
-IG.prototype.setd = function(level) {
-    IG.prototype.d = Helper.d[level - 1];
+// ms parameter for temperature
+IG.prototype.ms = 60;
+
+// Temperature
+IG.prototype.temperature = function(data) {
+    var total = 0;
+    for(var i = 0; i < data.length; i++) {
+        total = total + Helper.sum(data[i]);
+    }
+    return IG.prototype.T * (total / (data.length * data[data.length - 1].length * 10));
 };
-exports.setd = IG.prototype.setd;
+exports.temperature = IG.prototype.temperature;
+
+// Termination criterion
+IG.prototype.termination = function(data) {
+    return data.length * (data[data.length - 1].length / 2) * IG.prototype.ms;
+};
+exports.termination = IG.prototype.termination;
 
 // NEH initialization
 IG.prototype.initializationNEH = function(data) {
-    return NEH.order(data);
+    return NEH.apply(data);
 };
 
 // Iterative improvement insertion
 IG.prototype.iterativeImprovementInsertion = function(pi) {
     var sequence, value, minSequence, minValue, random, position;
-    var pi$ = [].concat(pi);
-    var piB = [].concat(pi);
+    var pi$ = Helper.clone(pi);
+    var piB = Helper.clone(pi);
     var improve = true;
     while(improve) {
         improve = false;
-        sequence = [].concat(piB);
-        value = Helper.makespan(sequence);
+        sequence = Helper.clone(piB);
+        value = IG.prototype.makespan(sequence);
         minSequence = sequence;
         minValue = value;
         while(pi$.length > 0) {
@@ -53,25 +60,25 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
             position = Helper.position(sequence, Helper.get(pi$, random));
             for(var i = position; i < piB.length; i++) {
                 sequence = Helper.toggle(sequence, i, i + 1);
-                value = Helper.makespan(sequence);
+                value = IG.prototype.makespan(sequence);
                 if(value < minValue) {
                     minSequence = sequence;
                     minValue = value;
                 }
             }
             sequence = Helper.toggle(sequence, piB.length, 1);
-            value = Helper.makespan(sequence);
+            value = IG.prototype.makespan(sequence);
             minSequence = sequence;
             minValue = value;
             for(var j = 1; j < position - 1; j++) {
                 sequence = Helper.toggle(sequence, j, j + 1);
-                value = Helper.makespan(sequence);
+                value = IG.prototype.makespan(sequence);
                 if(value < minValue) {
                     minSequence = sequence;
                     minValue = value;
                 }
             }
-            if(Helper.makespan(minSequence) < Helper.makespan(piB)) {
+            if(IG.prototype.makespan(minSequence) < IG.prototype.makespan(piB)) {
                 piB = minSequence;
                 improve = true;
             }
@@ -82,25 +89,25 @@ IG.prototype.iterativeImprovementInsertion = function(pi) {
 };
 
 // Iterated Greedy heuristic
-IG.prototype.order = function(data) {
+IG.prototype.apply = function(data) {
+
+    // Variables
     var pi, piB, piR, pi$, pi$$, random, item, sequence, value, minSequence, minValue;
-    var temperature = Helper.temperature(data, IG.prototype.T);
-    var criterion = Helper.criterion(data, IG.prototype.criterionMilliseconds);
 
     // Initialization
     pi = IG.prototype.initializationNEH(data);
     pi = IG.prototype.iterativeImprovementInsertion(pi);
-    piB = [].concat(pi);
+    piB = Helper.clone(pi);
 
     // Reset timer
     Timer.reset();
 
     // Iterate until termination criterion is satisfied
-    while(Timer.diff(false) < criterion) {
+    while(Timer.diff(false) < IG.prototype.termination(data)) {
 
         // Destruction phase
         piR = [];
-        pi$ = [].concat(pi);
+        pi$ = Helper.clone(pi);
         for(var i = 1; i <= Math.min(IG.prototype.d, pi$.length); i++) {
             random = Math.floor((Math.random() * pi$.length)) + 1;
             item = Helper.get(pi$, random);
@@ -111,12 +118,12 @@ IG.prototype.order = function(data) {
         // Construction phase
         for(var j = 1; j <= piR.length; j++) {
             sequence = Helper.insertBefore(pi$, 1, Helper.get(piR, j));
-            value = Helper.makespan(sequence);
+            value = IG.prototype.makespan(sequence);
             minSequence = sequence;
             minValue = value;
             for(var k = 1; k < piR.length; k++) {
                 sequence = Helper.toggle(sequence, j, j + 1);
-                value = Helper.makespan(sequence);
+                value = IG.prototype.makespan(sequence);
                 if(value < minValue) {
                     minSequence = sequence;
                     minValue = value;
@@ -128,16 +135,16 @@ IG.prototype.order = function(data) {
         // Local search
         pi$$ = IG.prototype.iterativeImprovementInsertion(pi$);
 
-        if(Helper.makespan(pi$$) < Helper.makespan(pi)) {
+        if(IG.prototype.makespan(pi$$) < IG.prototype.makespan(pi)) {
             pi = pi$$;
-            if(Helper.makespan(pi) < Helper.makespan(piB)) {
+            if(IG.prototype.makespan(pi) < IG.prototype.makespan(piB)) {
                 piB = pi;
             }
-        } else if(Math.random() <= Math.exp(-(Helper.makespan(pi$$) - Helper.makespan(pi)) / temperature)) {
+        } else if(Math.random() <= Math.exp(-(IG.prototype.makespan(pi$$) - IG.prototype.makespan(pi)) / IG.prototype.temperature(data))) {
             pi = pi$$;
         }
 
     }
     return piB;
 };
-exports.order = IG.prototype.order;
+exports.apply = IG.prototype.apply;
