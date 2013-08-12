@@ -45,10 +45,16 @@ IG.prototype.initializationNEH = function(data) {
 
 // Iterative improvement insertion
 IG.prototype.iterativeImprovementInsertion = function(pi) {
-    var sequence, value, minSequence, minValue, random, position;
-    var pi$ = Helper.clone(pi);
-    var piB = Helper.clone(pi);
-    var improve = true;
+
+    // Variables
+    var pi$, piB, improve, sequence, value, minSequence, minValue, random, position;
+
+    // Initialization
+    pi$ = Helper.clone(pi);
+    piB = Helper.clone(pi);
+    improve = true;
+
+    // Repeat until improvement fails
     while(improve) {
         improve = false;
         sequence = Helper.clone(piB);
@@ -102,7 +108,7 @@ IG.prototype.apply = function(data) {
     // Reset timer
     Timer.reset();
 
-    // Iterate until termination criterion is satisfied
+    // Repeat until termination time is reached
     while(Timer.diff(false) < IG.prototype.termination(data)) {
 
         // Destruction phase
@@ -135,8 +141,11 @@ IG.prototype.apply = function(data) {
         // Local search
         pi$$ = IG.prototype.iterativeImprovementInsertion(pi$);
 
+        // Acceptance criterion
         if(IG.prototype.makespan(pi$$) < IG.prototype.makespan(pi)) {
             pi = pi$$;
+
+            // Check if new best permutation
             if(IG.prototype.makespan(pi) < IG.prototype.makespan(piB)) {
                 piB = pi;
             }
