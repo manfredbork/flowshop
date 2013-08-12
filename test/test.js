@@ -1,3 +1,4 @@
+// Unit tests
 var assert = require('assert');
 var Helper = require('./../helper');
 var NEH = require('./../neh');
