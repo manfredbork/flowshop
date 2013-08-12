@@ -4,16 +4,16 @@ var Timer = require('./../timer');
 var NEH = require('./../neh');
 var IG = require('./../ig');
 
-// Relative percentage deviation
-var rpdNEH = 0;
-var rpdIG = 0;
-
 // Number of jobs and machines
 var jobs = 20;
 var machines = 5;
 
 // Filter Taillard instances by jobs and machines
-var filteredInstances = instances.filter(20, 5);
+var filteredInstances = instances.filter(jobs, machines);
+
+// Relative percentage deviation
+var rpdNEH = 0;
+var rpdIG = 0;
 
 // Reset timer
 Timer.reset();
@@ -37,11 +37,11 @@ for(var i = 0; i < filteredInstances.length; i++) {
     console.log('          NAME:', filteredInstances[i].initialSeed);
     console.log('  NEH MAKESPAN:', NEH.makespan($NEH));
     console.log('      MAKESPAN:', IG.makespan($IG));
-    console.log('  TIME ELAPSED:', (Timer.diff(true) / 1000) + ' SECS');
+    console.log('  TIME ELAPSED:', Timer.diff(true) / 1000, 'SECS');
     console.log('______________________________________________________________');
 
 }
 
     console.log('      INSTANCE:', jobs + ' x ' + machines);
-    console.log('       RPD NEH:', rpdNEH / filteredInstances.length + '%');
-    console.log('        RPD IG:', rpdIG / filteredInstances.length + '%');
+    console.log('       RPD NEH:', Math.round(rpdNEH / filteredInstances.length * 100) / 100, '%');
+    console.log('        RPD IG:', Math.round(rpdIG / filteredInstances.length * 100) / 100, '%');
