@@ -6,8 +6,8 @@ var Helper = require('./helper');
 function NEH() {
 }
 util.inherits(NEH, Flowshop);
-exports.makespan = NEH.prototype.makespan;
 exports.rpd = NEH.prototype.rpd;
+exports.makespan = NEH.prototype.makespan;
 
 // NEH heuristic
 NEH.prototype.apply = function(data) {

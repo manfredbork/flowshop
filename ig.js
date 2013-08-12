@@ -8,8 +8,8 @@ var NEH = require('./neh');
 function IG() {
 }
 util.inherits(IG, Flowshop);
-exports.makespan = IG.prototype.makespan;
 exports.rpd = IG.prototype.rpd;
+exports.makespan = IG.prototype.makespan;
 
 // T parameter
 IG.prototype.T = 0.4;
