@@ -5,7 +5,7 @@ var NEH = require('./../neh');
 var IG = require('./../ig');
 
 // Number of jobs and machines
-var jobs = 100;
+var jobs = 20;
 var machines = 5;
 
 // Filter Taillard instances by jobs and machines
