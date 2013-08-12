@@ -18,8 +18,8 @@ var rpdIG = 0;
 // Reset timer
 Timer.reset();
 
-    console.log('PROCESSING');
-    console.log('______________________________________________________________');
+console.log('PROCESSING');
+console.log('______________________________________________________________');
 
 // Iterate over filtered instances
 for(var i = 0; i < filteredInstances.length; i++) {
@@ -42,6 +42,6 @@ for(var i = 0; i < filteredInstances.length; i++) {
 
 }
 
-    console.log('      INSTANCE:', jobs + ' x ' + machines);
-    console.log('       RPD NEH:', Math.round(rpdNEH / filteredInstances.length * 100) / 100, '%');
-    console.log('        RPD IG:', Math.round(rpdIG / filteredInstances.length * 100) / 100, '%');
+console.log('      INSTANCE:', jobs + ' x ' + machines);
+console.log('       RPD NEH:', Math.round(rpdNEH / filteredInstances.length * 100) / 100, '%');
+console.log('        RPD IG:', Math.round(rpdIG / filteredInstances.length * 100) / 100, '%');

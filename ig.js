@@ -140,7 +140,8 @@ IG.prototype.apply = function(data) {
             if(IG.prototype.makespan(pi) < IG.prototype.makespan(piB)) {
                 piB = pi;
             }
-        } else if(Math.random() <= Math.exp(-(IG.prototype.makespan(pi$$) - IG.prototype.makespan(pi)) / IG.prototype.temperature(data))) {
+        } else if(Math.random() <=
+            Math.exp(-(IG.prototype.makespan(pi$$) - IG.prototype.makespan(pi)) / IG.prototype.temperature(data))) {
             pi = pi$$;
         }
 
