@@ -1,7 +1,7 @@
 // Implementing algorithm should inherit from Flowshop
 function Flowshop() {
 }
-module.exports = Flowshop;//
+module.exports = Flowshop;
 
 // Relative percentage deviation
 Flowshop.prototype.rpd = function(some, best) {
