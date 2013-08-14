@@ -77,8 +77,7 @@ Matrix.prototype = {
 
     writeRow: function (row, data) {
         if (util.isArray(data)) {
-            var len = this.M.length;
-            if (row > 0 && row <= this.M[len - 1].length) {
+            if (row > 0 && row <= this.M[this.M.length - 1].length) {
                 for(var i = 0; i < this.M.length; i++) {
                     this.M[i][row - 1] = data[i];
                 }
