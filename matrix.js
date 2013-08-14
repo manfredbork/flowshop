@@ -73,7 +73,6 @@ Matrix.prototype = {
      * @method writeRow
      * @param {Number} row Position of row
      * @param {Array} data Data to write
-     * @chainable
      */
 
     writeRow: function (row, data) {
