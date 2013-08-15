@@ -33,7 +33,7 @@ var Randomize = function () {
 /**
  * Random number generator
  *
- * @module Math
+ * @module Randomize
  * @class Randomize
  * @api
  */

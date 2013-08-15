@@ -45,7 +45,7 @@ var Matrix = function (columns, rows) {
 /**
  * Two dimensional matrix
  *
- * @module Math
+ * @module Matrix
  * @class Matrix
  * @api
  */
