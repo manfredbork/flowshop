@@ -27,8 +27,6 @@
 var util = require('util');
 
 /**
- * Initializes two dimensional matrix
- *
  * @param {Number} columns Number of columns
  * @param {Number} rows Number of rows
  * @constructor
@@ -45,12 +43,10 @@ var Matrix = function (columns, rows) {
 };
 
 /**
- * Stores Taillard processing times
+ * Two dimensional matrix
  *
- * @module Flowshop
+ * @module Math
  * @class Matrix
- * @namespace Flowshop
- * @part Matrix
  * @api
  */
 
@@ -125,3 +121,46 @@ Matrix.prototype = {
 
 // export the module
 module.exports = Matrix;
+
+/**
+ * @constructor
+ */
+
+var Randomize = function () {
+};
+
+/**
+ * Random number generator
+ *
+ * @module Math
+ * @class Randomize
+ * @api
+ */
+
+Randomize.prototype = {
+
+    /**
+     * Sets initial seed to randomize
+     *
+     * @method seed
+     * @param {Number} initialSeed Initial seed
+     */
+
+    seed: function (initialSeed) {
+        this.initialSeed = initialSeed;
+    },
+
+    /**
+     * Returns pseudo random number
+     *
+     * @method random
+     * @return {Number} number Random number
+     */
+
+    random: function () {
+        return 0;
+    }
+};
+
+// Extend Math module
+util._extend(Math, Randomize.prototype);
