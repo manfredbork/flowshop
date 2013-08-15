@@ -106,6 +106,23 @@ Matrix.prototype = {
     },
 
     /**
+     * Insert column into matrix
+     *
+     * @method insertColumn
+     * @param {Number} column Insertion position
+     * @param {Array} data Column data
+     */
+
+    insertColumn: function (column, data) {
+        if (column >= 0 && column <= this.M.length) {
+            this.M = []
+                .concat(this.M.slice(0, column))
+                .concat([data])
+                .concat(this.M.slice(column));
+        }
+    },
+
+    /**
      * Checks if positions of columns are valid
      *
      * @method _validColumns
