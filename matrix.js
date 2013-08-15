@@ -114,11 +114,13 @@ Matrix.prototype = {
      */
 
     insertColumn: function (column, data) {
-        if (column >= 0 && column <= this.M.length) {
-            this.M = []
-                .concat(this.M.slice(0, column))
-                .concat([data])
-                .concat(this.M.slice(column));
+        if (util.isArray(data)) {
+            if (column >= 0 && column <= this.M.length && data.length === this.M[this.M.length - 1].length) {
+                this.M = []
+                    .concat(this.M.slice(0, column))
+                    .concat([data])
+                    .concat(this.M.slice(column));
+            }
         }
     },
 
