@@ -95,7 +95,7 @@ Matrix.prototype = {
             column2 = column1 ^ column2;
             column1 = column1 ^ column2;
         }
-        if (this._validColumns(column1, column2)) {
+        if (this._validColumn(column1) && this._validColumn(column2)) {
             this.M = []
                 .concat(this.M.slice(0, column1 - 1))
                 .concat([this.M[column2 - 1]])
@@ -125,16 +125,15 @@ Matrix.prototype = {
     },
 
     /**
-     * Checks if positions of columns are valid
+     * Checks if position of column is valid
      *
-     * @method _validColumns
-     * @param {Number} column1 Position of 1st column
-     * @param {Number} column2 Position of 2nd column
+     * @method _validColumn
+     * @param {Number} column Position of column
      * @private
      */
 
-    _validColumns: function (column1, column2) {
-        return column1 > 0 && column1 <= this.M.length && column2 > 0 && column2 <= this.M.length;
+    _validColumn: function (column) {
+        return column > 0 && column <= this.M.length;
     }
 };
 
