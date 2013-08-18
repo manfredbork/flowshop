@@ -244,7 +244,6 @@ Matrix.prototype = {
         } else {
             return 1;
         }
-        return 1;
     },
 
     /**
@@ -317,4 +316,3 @@ Matrix.prototype = {
 
 // export the module
 module.exports = Matrix;
-
