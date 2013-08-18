@@ -34,9 +34,9 @@ var util = require('util');
 
 var Matrix = function (columns, rows) {
     this.M = [];
-    for(var i = 0; i < columns; i++) {
+    for (var i = 0; i < columns; i++) {
         this.M[i] = [];
-        for(var j = 0; j < rows; j++) {
+        for (var j = 0; j < rows; j++) {
             this.M[i][j] = 0;
         }
     }
@@ -56,11 +56,13 @@ Matrix.prototype = {
      * Returns clone of matrix
      *
      * @method clone
-     * @return {Array} matrix Matrix clone
+     * @return {Matrix} Matrix clone
      */
 
     clone: function () {
-        return [].concat(this.M);
+        var matrix = new Matrix();
+        matrix.M = [].concat(this.M);
+        return matrix;
     },
 
     /**
@@ -68,15 +70,13 @@ Matrix.prototype = {
      *
      * @method writeRow
      * @param {Number} row Position of row
-     * @param {Array} data Data to write
+     * @param {Array} data Row data
      */
 
     writeRow: function (row, data) {
-        if (util.isArray(data)) {
-            if (row > 0 && row <= this.M[this.M.length - 1].length && data.length === this.M.length) {
-                for(var i = 0; i < this.M.length; i++) {
-                    this.M[i][row - 1] = data[i];
-                }
+        if (this._validRow(row) && this._validRowData(data)) {
+            for (var i = 0; i < this.M.length; i++) {
+                this.M[i][row - 1] = data[i];
             }
         }
     },
@@ -106,22 +106,200 @@ Matrix.prototype = {
     },
 
     /**
-     * Insert column into matrix
+     * Insert column data into matrix
      *
-     * @method insertColumn
-     * @param {Number} column Insertion position
+     * @method insertColumnData
+     * @param {Number} column Position of insert
      * @param {Array} data Column data
      */
 
-    insertColumn: function (column, data) {
-        if (util.isArray(data)) {
-            if (column >= 0 && column <= this.M.length && data.length === this.M[this.M.length - 1].length) {
+    insertColumnData: function (column, data) {
+        if (this._validColumnData(data)) {
+            if (this._validColumn(column)) {
                 this.M = []
                     .concat(this.M.slice(0, column))
                     .concat([data])
                     .concat(this.M.slice(column));
+            } else {
+                this.M = [data]
+                    .concat(this.M);
             }
         }
+    },
+
+    /**
+     * Reads value from matrix
+     *
+     * @method readValue
+     * @param {Number} column Position of column
+     * @param {Number} row Position of row
+     * @return {Number} Value
+     */
+
+    readValue: function (column, row) {
+        if (this._validColumn(column) && this._validRow(row)) {
+            return this.M[column - 1][row - 1];
+        } else {
+            return 0;
+        }
+    },
+
+    /**
+     * Writes value into matrix
+     *
+     * @method writeValue
+     * @param {Number} column Position of column
+     * @param {Number} row Position of row
+     * @param {Number} value Value
+     */
+
+    writeValue: function (column, row, value) {
+        if (this._validColumn(column) && this._validRow(row)) {
+            this.M[column - 1][row - 1] = value;
+        }
+    },
+
+////////////////////////////// Special Scheduling methods //////////////////////////////
+
+    /**
+     * Sums row values from matrix
+     *
+     * @method sumRowValues
+     * @param {Number} column Position of column
+     * @return {Number} Sum of row values
+     */
+
+    sumRowValues: function (column) {
+        if (this._validColumn(column)) {
+            return this._internalSum(this.M[column - 1]);
+        } else {
+            return 0;
+        }
+    },
+
+    /**
+     * Makespan of matrix
+     *
+     * @method makespan
+     * @return {Number} Makespan value
+     */
+
+    makespan: function () {
+        var matrix = new Matrix(this.M.length, this.M[this.M.length - 1].length);
+        for (var i = 1; i <= matrix.M.length; i++) {
+            for (var j = 1; j <= matrix.M[i - 1].length; j++) {
+                var maxValue = Math.max(matrix.readValue(i - 1, j), matrix.readValue(i, j - 1));
+                matrix.writeValue(i, j, maxValue + this.readValue(i, j));
+            }
+        }
+        return matrix.readValue(this.M.length, this.M[this.M.length - 1].length);
+    },
+
+    /**
+     * Sorts columns by comparator
+     *
+     * @method sortColumns
+     * @param {Function} comparator Comparator function
+     */
+
+    sortColumns: function (comparator) {
+        if (comparator) {
+            this.M = this.M.sort(comparator);
+        } else {
+            this.M = this.M.sort(this._defaultComparator.bind(this));
+        }
+    },
+
+    /**
+     * Gets or sets permutation of matrix
+     *
+     * @method permutation
+     * @param {Matrix|Array} data Data
+     * @return {Matrix|Array} Data
+     */
+
+    permutation: function (data) {
+        if (util.isArray(data)) {
+            return new Matrix();
+        } else {
+            return [];
+        }
+    },
+
+//////////////////////////////// Private Matrix methods ////////////////////////////////
+
+    /**
+     * Compares and sorts two columns
+     *
+     * @method _defaultComparator
+     * @param {Array} column1 Column data of 1st column
+     * @param {Array} column2 Column data of 2nd column
+     * @return {Number} Comparator value
+     * @private
+     */
+
+    _defaultComparator: function (column1, column2) {
+        if (this._internalSum(column1) > this._internalSum(column2)) {
+            return -1;
+        } else {
+            return 1;
+        }
+        return 1;
+    },
+
+    /**
+     * Sums values of array
+     *
+     * @method _internalSum
+     * @param {Array} data Values
+     * @return {Number} Sum of values
+     * @private
+     */
+
+    _internalSum: function (data) {
+        var sum = 0;
+        for (var i = 0; i < data.length; i++) {
+            sum = sum + data[i];
+        }
+        return sum;
+    },
+
+    /**
+     * Checks if data is valid row data
+     *
+     * @method _validRowData
+     * @param {Array} data Row data
+     * @return {Boolean} Valid row data
+     * @private
+     */
+
+    _validRowData: function (data) {
+        return util.isArray(data) && data.length === this.M.length;
+    },
+
+    /**
+     * Checks if data is valid column data
+     *
+     * @method _validColumnData
+     * @param {Array} data Column data
+     * @return {Boolean} Valid column data
+     * @private
+     */
+
+    _validColumnData: function (data) {
+        return util.isArray(data) && data.length === this.M[this.M.length - 1].length;
+    },
+
+    /**
+     * Checks if position of row is valid
+     *
+     * @method _validRow
+     * @param {Number} row Position of row
+     * @private
+     */
+
+    _validRow: function (row) {
+        return row > 0 && row <= this.M[this.M.length - 1].length;
     },
 
     /**
@@ -139,3 +317,4 @@ Matrix.prototype = {
 
 // export the module
 module.exports = Matrix;
+
