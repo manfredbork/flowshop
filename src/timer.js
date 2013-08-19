@@ -84,6 +84,7 @@ Timer.prototype = {
      * @param {Number} time Time in milliseconds
      * @param {String} format Time format
      * @return {String} Formatted time
+     * @private
      */
 
     _formatTime: function (time, format) {
@@ -111,6 +112,7 @@ Timer.prototype = {
      * @param {Number} n Number
      * @param {Number} len Length
      * @return {String} Number with leading zeros
+     * @private
      */
 
     _zeroPad: function (n, len) {
@@ -126,6 +128,7 @@ Timer.prototype = {
      *
      * @method _diffTimeInMilliseconds
      * @return {Number} Milliseconds
+     * @private
      */
 
     _diffTimeInMilliseconds: function () {
@@ -139,6 +142,7 @@ Timer.prototype = {
      *
      * @method _elapsedTimeInMilliseconds
      * @return {Number} Milliseconds
+     * @private
      */
 
     _elapsedTimeInMilliseconds: function () {
