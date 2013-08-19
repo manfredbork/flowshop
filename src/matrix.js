@@ -226,10 +226,10 @@ Matrix.prototype = {
             }
         } else if (data instanceof Matrix) {
             var permutation = [];
-            for(var i = 0; i < data.M.length; i++) {
-                for(var j = 0; j < this.M.length; j++) {
-                    if (data.M[i].join() === this.M[j].join()) {
-                        permutation[i] = j + 1;
+            for(var j = 0; j < data.M.length; j++) {
+                for(var k = 0; k < this.M.length; k++) {
+                    if (data.M[j].join() === this.M[k].join()) {
+                        permutation[j] = k + 1;
                     }
                 }
             }
