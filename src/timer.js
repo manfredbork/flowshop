@@ -52,7 +52,7 @@ Timer.prototype = {
     },
 
     /**
-     * Reads time since last diff call
+     * Reads time difference since last diff
      *
      * @method diffTime
      * @param {String} format Time format
@@ -122,7 +122,7 @@ Timer.prototype = {
     },
 
     /**
-     * Reads time since last diff call
+     * Reads time difference since last diff
      *
      * @method _diffTimeInMilliseconds
      * @return {Number} Milliseconds
