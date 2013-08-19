@@ -61,7 +61,7 @@ Matrix.prototype = {
 
     clone: function () {
         var matrix = new Matrix();
-        matrix.M = [].concat(this.M);
+            matrix.M = [].concat(this.M);
         return matrix;
     },
 
@@ -189,7 +189,7 @@ Matrix.prototype = {
         for(var i = 1; i <= matrix.M.length; i++) {
             for(var j = 1; j <= matrix.M[i - 1].length; j++) {
                 var maxValue = Math.max(matrix.readValue(i - 1, j), matrix.readValue(i, j - 1));
-                matrix.writeValue(i, j, maxValue + this.readValue(i, j));
+                    matrix.writeValue(i, j, maxValue + this.readValue(i, j));
             }
         }
         return matrix.readValue(this.M.length, this.M[this.M.length - 1].length);
