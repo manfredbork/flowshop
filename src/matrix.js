@@ -53,7 +53,7 @@ var Matrix = function (columns, rows) {
 Matrix.prototype = {
 
     /**
-     * Returns clone of matrix
+     * Clones matrix
      *
      * @method clone
      * @return {Matrix} Matrix clone
@@ -66,7 +66,7 @@ Matrix.prototype = {
     },
 
     /**
-     * Writes row of values to matrix
+     * Writes row into matrix
      *
      * @method writeRow
      * @param {Number} row Position of row
@@ -85,8 +85,8 @@ Matrix.prototype = {
      * Toggles two columns within matrix
      *
      * @method toggleColumns
-     * @param {Number} column1 Position of 1st column
-     * @param {Number} column2 Position of 2nd column
+     * @param {Number} column1 Position of column one
+     * @param {Number} column2 Position of column two
      */
 
     toggleColumns: function (column1, column2) {
@@ -162,7 +162,7 @@ Matrix.prototype = {
 ////////////////////////////// Special Scheduling methods //////////////////////////////
 
     /**
-     * Sums row values from matrix
+     * Sums row of matrix
      *
      * @method sumRowValues
      * @param {Number} column Position of column
@@ -244,8 +244,8 @@ Matrix.prototype = {
      * Compares and sorts two columns
      *
      * @method _defaultComparator
-     * @param {Array} column1 Column data of 1st column
-     * @param {Array} column2 Column data of 2nd column
+     * @param {Array} column1 Column data of column 1
+     * @param {Array} column2 Column data of column 2
      * @return {Number} Comparator value
      * @private
      */
