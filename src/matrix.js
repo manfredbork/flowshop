@@ -34,9 +34,9 @@ var util = require('util');
 
 var Matrix = function (columns, rows) {
     this.M = [];
-    for (var i = 0; i < columns; i++) {
+    for(var i = 0; i < columns; i++) {
         this.M[i] = [];
-        for (var j = 0; j < rows; j++) {
+        for(var j = 0; j < rows; j++) {
             this.M[i][j] = 0;
         }
     }
@@ -75,7 +75,7 @@ Matrix.prototype = {
 
     writeRow: function (row, data) {
         if (this._validRow(row) && this._validRowData(data)) {
-            for (var i = 0; i < this.M.length; i++) {
+            for(var i = 0; i < this.M.length; i++) {
                 this.M[i][row - 1] = data[i];
             }
         }
@@ -106,14 +106,14 @@ Matrix.prototype = {
     },
 
     /**
-     * Insert column data into matrix
+     * Inserts column into matrix
      *
-     * @method insertColumnData
+     * @method insertColumn
      * @param {Number} column Position of insert
      * @param {Array} data Column data
      */
 
-    insertColumnData: function (column, data) {
+    insertColumn: function (column, data) {
         if (this._validColumnData(data)) {
             if (this._validColumn(column)) {
                 this.M = []
@@ -186,8 +186,8 @@ Matrix.prototype = {
 
     makespan: function () {
         var matrix = new Matrix(this.M.length, this.M[this.M.length - 1].length);
-        for (var i = 1; i <= matrix.M.length; i++) {
-            for (var j = 1; j <= matrix.M[i - 1].length; j++) {
+        for(var i = 1; i <= matrix.M.length; i++) {
+            for(var j = 1; j <= matrix.M[i - 1].length; j++) {
                 var maxValue = Math.max(matrix.readValue(i - 1, j), matrix.readValue(i, j - 1));
                 matrix.writeValue(i, j, maxValue + this.readValue(i, j));
             }
@@ -219,11 +219,23 @@ Matrix.prototype = {
      */
 
     permutation: function (data) {
-        if (util.isArray(data)) {
-            return new Matrix();
-        } else {
-            return [];
+        if (util.isArray(data) && this.M.length === data.length) {
+            var matrix = this.clone();
+            for(var i = 0; i < data.length; i++) {
+                this.M[i] = matrix.M[data[i]];
+            }
+        } else if (data instanceof Matrix) {
+            var permutation = [];
+            for(var i = 0; i < data.M.length; i++) {
+                for(var j = 0; j < this.M.length; j++) {
+                    if (data.M[i].join() === this.M[j].join()) {
+                        permutation[i] = j + 1;
+                    }
+                }
+            }
+            return permutation;
         }
+        return this;
     },
 
 //////////////////////////////// Private Matrix methods ////////////////////////////////
@@ -257,7 +269,7 @@ Matrix.prototype = {
 
     _internalSum: function (data) {
         var sum = 0;
-        for (var i = 0; i < data.length; i++) {
+        for(var i = 0; i < data.length; i++) {
             sum = sum + data[i];
         }
         return sum;
