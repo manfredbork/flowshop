@@ -80,10 +80,10 @@ Random.prototype = {
 
     _keystream: function (key) {
         var S = [];
+        var j = 0;
         for(var i = 0; i < 256; i++) {
             S[i] = i;
         }
-        var j = 0;
         for(var k = 0; k < 256; k++) {
             var swap = S[k];
             j = (j + swap + key[k % key.length].charCodeAt(0)) % 256;
