@@ -60,7 +60,7 @@ Matrix.prototype = {
      */
 
     clone: function () {
-        var matrix = new Matrix();
+        var matrix = new Matrix(this.len(), this.dim());
             matrix.M = [].concat(this.M);
         return matrix;
     },
@@ -68,28 +68,31 @@ Matrix.prototype = {
     /**
      * Writes row into matrix
      *
-     * @method writeRow
+     * @method write
      * @param {Number} row Position of row
      * @param {Array} data Row data
+     * @chainable
      */
 
-    writeRow: function (row, data) {
+    write: function (row, data) {
         if (this._validRow(row) && this._validRowData(data)) {
-            for(var i = 0; i < this.M.length; i++) {
+            for(var i = 0; i < this.len(); i++) {
                 this.M[i][row - 1] = data[i];
             }
         }
+        return this;
     },
 
     /**
      * Toggles two columns within matrix
      *
-     * @method toggleColumns
+     * @method toggle
      * @param {Number} column1 Position of column one
      * @param {Number} column2 Position of column two
+     * @chainable
      */
 
-    toggleColumns: function (column1, column2) {
+    toggle: function (column1, column2) {
         if (column1 > column2) {
             column1 = column1 ^ column2;
             column2 = column1 ^ column2;
@@ -103,17 +106,19 @@ Matrix.prototype = {
                 .concat([this.M[column1 - 1]])
                 .concat(this.M.slice(column2));
         }
+        return this;
     },
 
     /**
      * Inserts column into matrix
      *
-     * @method insertColumn
+     * @method insert
      * @param {Number} column Position of insert
      * @param {Array} data Column data
+     * @chainable
      */
 
-    insertColumn: function (column, data) {
+    insert: function (column, data) {
         if (this._validColumnData(data)) {
             if (this._validColumn(column)) {
                 this.M = []
@@ -121,55 +126,67 @@ Matrix.prototype = {
                     .concat([data])
                     .concat(this.M.slice(column));
             } else {
-                this.M = [data]
+                this.M = []
+                    .concat([data])
                     .concat(this.M);
             }
         }
+        return this;
     },
 
     /**
-     * Reads value from matrix
+     * Reads column from matrix
      *
-     * @method readValue
+     * @method read
      * @param {Number} column Position of column
-     * @param {Number} row Position of row
-     * @return {Number} Value
+     * @return {Array} Values
      */
 
-    readValue: function (column, row) {
-        if (this._validColumn(column) && this._validRow(row)) {
-            return this.M[column - 1][row - 1];
+    read: function (column) {
+        if (this._validColumn(column)) {
+            return this.M[column - 1];
         } else {
-            return 0;
+            return [];
         }
     },
 
     /**
-     * Writes value into matrix
+     * Returns length of matrix
      *
-     * @method writeValue
-     * @param {Number} column Position of column
-     * @param {Number} row Position of row
-     * @param {Number} value Value
+     * @method len
+     * @return {Number} Number of columns
      */
 
-    writeValue: function (column, row, value) {
-        if (this._validColumn(column) && this._validRow(row)) {
-            this.M[column - 1][row - 1] = value;
+    len: function () {
+        return this.M.length;
+    },
+
+    /**
+     * Returns dimension of matrix
+     *
+     * @method dim
+     * @return {Number} Number of rows
+     */
+
+    dim: function () {
+        if (this.len() > 0) {
+            return this.M[this.M.length - 1].length;
+        } else {
+            return 0;
         }
     },
 
 ////////////////////////////// Special Scheduling methods //////////////////////////////
 
     /**
-     * Sums row of matrix
+     * Sums column values of matrix
      *
-     * @method sumRowValues
+     * @method sum
      * @param {Number} column Position of column
-     * @return {Number} Sum of row values
+     * @return {Number} Sum of column values
      */
 
-    sumRowValues: function (column) {
+    sum: function (column) {
         if (this._validColumn(column)) {
             return this._internalSum(this.M[column - 1]);
         } else {
@@ -185,29 +202,26 @@ Matrix.prototype = {
      */
 
     makespan: function () {
-        var matrix = new Matrix(this.M.length, this.M[this.M.length - 1].length);
-        for(var i = 1; i <= matrix.M.length; i++) {
-            for(var j = 1; j <= matrix.M[i - 1].length; j++) {
-                var maxValue = Math.max(matrix.readValue(i - 1, j), matrix.readValue(i, j - 1));
-                    matrix.writeValue(i, j, maxValue + this.readValue(i, j));
+        var matrix = new Matrix(this.len(), this.dim());
+        for(var i = 1; i <= matrix.len(); i++) {
+            for(var j = 1; j <= matrix.dim(); j++) {
+                var maxValue = Math.max(matrix._readValue(i - 1, j), matrix._readValue(i, j - 1));
+                    matrix._writeValue(i, j, maxValue + this._readValue(i, j));
             }
         }
-        return matrix.readValue(this.M.length, this.M[this.M.length - 1].length);
+        return matrix._readValue(this.len(), this.dim());
     },
 
     /**
-     * Sorts columns by comparator
+     * Sorts columns by default comparator
      *
-     * @method sortColumns
-     * @param {Function} comparator Comparator function
+     * @method sort
+     * @chainable
      */
 
-    sortColumns: function (comparator) {
-        if (comparator) {
-            this.M = this.M.sort(comparator);
-        } else {
-            this.M = this.M.sort(this._defaultComparator.bind(this));
-        }
+    sort: function () {
+        this.M = this.M.sort(this._defaultComparator.bind(this));
+        return this;
     },
 
     /**
@@ -226,8 +240,8 @@ Matrix.prototype = {
             }
         } else if (data instanceof Matrix) {
             var permutation = [];
-            for(var j = 0; j < data.M.length; j++) {
-                for(var k = 0; k < this.M.length; k++) {
+            for(var j = 0; j < data.len(); j++) {
+                for(var k = 0; k < this.len(); k++) {
                     if (data.M[j].join() === this.M[k].join()) {
                         permutation[j] = k + 1;
                     }
@@ -239,6 +253,40 @@ Matrix.prototype = {
     },
 
 //////////////////////////////// Private Matrix methods ////////////////////////////////
+
+    /**
+     * Reads value from matrix
+     *
+     * @method _readValue
+     * @param {Number} column Position of column
+     * @param {Number} row Position of row
+     * @return {Number} Value
+     * @private
+     */
+
+    _readValue: function (column, row) {
+        if (this._validColumn(column) && this._validRow(row)) {
+            return this.M[column - 1][row - 1];
+        } else {
+            return 0;
+        }
+    },
+
+    /**
+     * Writes value into matrix
+     *
+     * @method _writeValue
+     * @param {Number} column Position of column
+     * @param {Number} row Position of row
+     * @param {Number} value Value
+     * @private
+     */
+
+    _writeValue: function (column, row, value) {
+        if (this._validColumn(column) && this._validRow(row)) {
+            this.M[column - 1][row - 1] = value;
+        }
+    },
 
     /**
      * Compares and sorts two columns
@@ -285,7 +333,7 @@ Matrix.prototype = {
      */
 
     _validRowData: function (data) {
-        return util.isArray(data) && data.length === this.M.length;
+        return util.isArray(data) && data.length === this.len();
     },
 
     /**
@@ -298,7 +346,7 @@ Matrix.prototype = {
      */
 
     _validColumnData: function (data) {
-        return util.isArray(data) && data.length === this.M[this.M.length - 1].length;
+        return util.isArray(data) && data.length === this.dim();
     },
 
     /**
@@ -310,7 +358,7 @@ Matrix.prototype = {
      */
 
     _validRow: function (row) {
-        return row > 0 && row <= this.M[this.M.length - 1].length;
+        return row > 0 && row <= this.dim();
     },
 
     /**
@@ -322,7 +370,7 @@ Matrix.prototype = {
      */
 
     _validColumn: function (column) {
-        return column > 0 && column <= this.M.length;
+        return column > 0 && column <= this.len();
     }
 };
 
