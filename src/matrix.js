@@ -240,27 +240,14 @@ Matrix.prototype = {
     },
 
     /**
-     * Gets or sets permutation of matrix
+     * Gets relative percentage deviation
      *
-     * @method permutation
-     * @param {Matrix|Array} data Data
-     * @return {Matrix|Array} Data
+     * @method rpd
+     * @param {Number} best Best makespan
+     * @return {Number} Relative percentage deviation
      */
-
-    permutation: function (data) {
-        if (util.isArray(data) && this.M.length === data.length) {
-            var matrix = this.clone();
-            for(var i = 0; i < data.length; i++) {
-                this.M[i] = matrix.M[data[i]];
-            }
-        } else if (data instanceof Matrix) {
-            var permutation = [];
-            for(var j = 0; j < data.len(); j++) {
-                permutation[j] = this.position(data[j]);
-            }
-            return permutation;
-        }
-        return this;
+    rpd: function (best) {
+        return Math.round((this.makespan() - best) / best * 10000) / 100;
     },
 
     /**

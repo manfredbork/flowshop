@@ -104,12 +104,10 @@ Importer.prototype = {
     _loadData: function (name) {
         var raw = [];
         var file = this._fileName(name);
-        if (name.match(/^ta[0-9]+$/)) {
-            try {
-                raw = fs.readFileSync('taillard/' + file).toString()
-                        .split(String.fromCharCode(13) + String.fromCharCode(10));
-            } catch (err) {
-            }
+        try {
+            raw = fs.readFileSync('taillard/' + file).toString()
+                    .split(String.fromCharCode(13) + String.fromCharCode(10));
+        } catch (err) {
         }
         var parsed = [];
         for(var i = 0; i < raw.length; i++) {
