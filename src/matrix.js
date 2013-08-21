@@ -23,7 +23,7 @@
 
 'use strict';
 
-// ext. libs
+// imports
 var util = require('util');
 
 /**
@@ -51,19 +51,6 @@ var Matrix = function (columns, rows) {
  */
 
 Matrix.prototype = {
-
-    /**
-     * Clones matrix
-     *
-     * @method clone
-     * @return {Matrix} Matrix clone
-     */
-
-    clone: function () {
-        var matrix = new Matrix(this.len(), this.dim());
-            matrix.M = [].concat(this.M);
-        return matrix;
-    },
 
     /**
      * Writes row into matrix
@@ -119,19 +106,47 @@ Matrix.prototype = {
      */
 
     insert: function (column, data) {
-        if (this._validColumnData(data)) {
-            if (this._validColumn(column)) {
-                this.M = []
-                    .concat(this.M.slice(0, column))
-                    .concat([data])
-                    .concat(this.M.slice(column));
-            } else {
-                this.M = []
-                    .concat([data])
-                    .concat(this.M);
-            }
+        if (this._validColumnData(data) && this._validColumn(column)) {
+            this.M = []
+                .concat(this.M.slice(0, column))
+                .concat([data])
+                .concat(this.M.slice(column));
+        } else if (util.isArray(data)) {
+            this.M = []
+                .concat([data])
+                .concat(this.M);
         }
         return this;
+    },
+
+    /**
+     * Removes column from matrix
+     *
+     * @method remove
+     * @param {Number} column Position of column
+     * @chainable
+     */
+
+    remove: function (column) {
+        if (this._validColumn(column)) {
+            this.M = []
+                .concat(this.M.slice(0, column - 1))
+                .concat(this.M.slice(column));
+        }
+        return this;
+    },
+
+    /**
+     * Clones matrix
+     *
+     * @method clone
+     * @return {Matrix} Matrix clone
+     */
+
+    clone: function () {
+        var matrix = new Matrix(this.len(), this.dim());
+        matrix.M = [].concat(this.M);
+        return matrix;
     },
 
     /**
@@ -241,15 +256,28 @@ Matrix.prototype = {
         } else if (data instanceof Matrix) {
             var permutation = [];
             for(var j = 0; j < data.len(); j++) {
-                for(var k = 0; k < this.len(); k++) {
-                    if (data.M[j].join() === this.M[k].join()) {
-                        permutation[j] = k + 1;
-                    }
-                }
+                permutation[j] = this.position(data[j]);
             }
             return permutation;
         }
         return this;
+    },
+
+    /**
+     * Gets position of column data within matrix
+     *
+     * @method position
+     * @param {Array} data Column data
+     * @return {Number} Position of column
+     */
+
+    position: function (data) {
+        for(var i = 0; i < this.len(); i++) {
+            if (data.join() === this.M[i].join()) {
+                return i + 1;
+            }
+        }
+        return 0;
     },
 
 //////////////////////////////// Private Matrix methods ////////////////////////////////

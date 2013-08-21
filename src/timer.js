@@ -101,6 +101,8 @@ Timer.prototype = {
             return mm + ':' + this._zeroPad(ss, 2) + '.' + sss;
         } else if (format === 'ss.sss') {
             return ss + '.' + sss;
+        } else if (format === 'ms') {
+            return (ss * 1000 + sss) + '';
         }
         return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2) + '.' + sss;
     },

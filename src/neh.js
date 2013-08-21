@@ -47,21 +47,25 @@ NEH.prototype = {
      * Runs NEH algorithm
      *
      * @method run
-     * @param {Matrix} data Taillard data
+     * @param {Matrix} T Taillard data
      * @return {Matrix} Taillard data after permutation
      */
 
     run: function (T) {
-        // Variables
+
+        // Definitions
         var PI, PIbest, PIseq, PIval, PIminseq, PIminval;
+
         // Sort descending
         PI = T.clone().sort();
+
         // Initialization
-        PIbest = new Matrix(2, PI.dim());
-        PIbest.M = [PI.read(1), PI.read(2)];
+        PIbest = new Matrix(0, PI.dim());
+        PIbest.insert(0, PI.read(1)).insert(0, PI.read(2));
         if(PIbest.makespan() > PIbest.clone().toggle(1, 2).makespan()) {
             PIbest.toggle(1, 2);
         }
+
         // Find best inserts
         for(var i = 3; i <= PI.len(); i++) {
             PIseq = PIbest.clone().insert(0, PI.read(i));
@@ -80,7 +84,6 @@ NEH.prototype = {
         }
         return PIbest;
     }
-
 };
 
 // export the module
