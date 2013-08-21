@@ -45,7 +45,7 @@ var IG = function () {
 
 IG.prototype = {
 
-    // Default params
+    // Instance variables
     ms: 60,
     d: 4,
     T: 0.4,
@@ -111,19 +111,19 @@ IG.prototype = {
         PIimprove = true;
 
         // Repeat until improvement fails
-        while(PIimprove) {
+        while (PIimprove) {
             PIimprove = false;
             PIseq = PIbest.clone();
             PIval = PIseq.makespan();
             PIminseq = PIseq.clone();
             PIminval = PIval;
-            while(PIi.len() > 0) {
+            while (PIi.len() > 0) {
                 PIrand = Math.floor(Math.random() * PIi.len()) + 1;
                 PIpos = PIseq.position(PIi.read(PIrand));
                 for(var i = PIpos; i < PIbest.len(); i++) {
                     PIseq.toggle(i, i + 1);
                     PIval = PIseq.makespan();
-                    if(PIval < PIminval) {
+                    if (PIval < PIminval) {
                         PIminseq = PIseq.clone();
                         PIminval = PIval;
                     }
@@ -135,12 +135,12 @@ IG.prototype = {
                 for(var j = 1; j < PIpos - 1; j++) {
                     PIseq.toggle(j, j + 1);
                     PIval = PIseq.makespan();
-                    if(PIval < PIminval) {
+                    if (PIval < PIminval) {
                         PIminseq = PIseq.clone();
                         PIminval = PIval;
                     }
                 }
-                if(PIminseq.makespan() < PIbest.makespan()) {
+                if (PIminseq.makespan() < PIbest.makespan()) {
                     PIbest = PIminseq.clone();
                     PIimprove = true;
                 }
@@ -173,7 +173,7 @@ IG.prototype = {
         PItimer = new Timer();
 
         // Repeat until termination time is reached
-        while(PItimer.elapsedTime('ms') < this.terminationTime(T)) {
+        while (PItimer.elapsedTime('ms') < this.terminationTime(T)) {
 
             // Destruction phase
             PIr = new Matrix(0, PI.dim());
@@ -194,7 +194,7 @@ IG.prototype = {
                 for(var k = 1; k < PIr.len(); k++) {
                     PIseq.toggle(j, j + 1);
                     PIval = PIseq.makespan();
-                    if(PIval < PIminval) {
+                    if (PIval < PIminval) {
                         PIminseq = PIseq.clone();
                         PIminval = PIval;
                     }
@@ -206,12 +206,12 @@ IG.prototype = {
             PIii = this.improvementInsertion(PIi);
 
             // Acceptance criterion
-            if(PIii.makespan() < PI.makespan()) {
+            if (PIii.makespan() < PI.makespan()) {
                 PI = PIii.clone();
-                if(PI.makespan() < PIbest.makespan()) {
+                if (PI.makespan() < PIbest.makespan()) {
                     PIbest = PI.clone();
                 }
-            } else if(Math.random() <= Math.exp(-(PIii.makespan() - PI.makespan()) / this.temperatureValue(T))) {
+            } else if (Math.random() <= Math.exp(-(PIii.makespan() - PI.makespan()) / this.temperatureValue(T))) {
                 PI = PIii.clone();
             }
         }

@@ -41,13 +41,13 @@ var Random = function () {
 Random.prototype = {
 
     /**
-     * Initializes number generator with initial seed
+     * Sets initial seed
      *
-     * @method init
+     * @method initialSeed
      * @param {String} seed Initial seed
      */
 
-    init: function (seed) {
+    initialSeed: function (seed) {
         this.i = 0;
         this.j = 0;
         this.keystream = this._keystream(seed);
@@ -61,11 +61,13 @@ Random.prototype = {
      */
 
     random: function () {
-        var n = this._randomByte() + this._randomByte() * 256 + this._randomByte() * 65536 +
+        if (!this.keystream) {
+            this.initialSeed('seed');
+        }
+        return (this._randomByte() + this._randomByte() * 256 + this._randomByte() * 65536 +
                 this._randomByte() * 16777216 + this._randomByte() * 4294967296 +
                 this._randomByte() * 1099511627776 + this._randomByte() * 281474976710656 +
-                this._randomByte() * 72057594037927940;
-        return n / 18446744073709551616;
+                this._randomByte() * 72057594037927940) / 18446744073709551616;
     },
 
 //////////////////////////////// Private Random methods ////////////////////////////////

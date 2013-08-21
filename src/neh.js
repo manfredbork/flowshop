@@ -23,7 +23,7 @@
 
 'use strict';
 
-// import
+// imports
 var Matrix = require('./matrix');
 
 /**
@@ -62,7 +62,7 @@ NEH.prototype = {
         // Initialization
         PIbest = new Matrix(0, PI.dim());
         PIbest.insert(0, PI.read(1)).insert(0, PI.read(2));
-        if(PIbest.makespan() > PIbest.clone().toggle(1, 2).makespan()) {
+        if (PIbest.makespan() > PIbest.clone().toggle(1, 2).makespan()) {
             PIbest.toggle(1, 2);
         }
 
@@ -75,7 +75,7 @@ NEH.prototype = {
             for(var j = 1; j < PIseq.len(); j++) {
                 PIseq.toggle(j, j + 1);
                 PIval = PIseq.makespan();
-                if(PIval < PIminval) {
+                if (PIval < PIminval) {
                     PIminseq = PIseq.clone();
                     PIminval = PIval;
                 }
