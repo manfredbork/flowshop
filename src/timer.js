@@ -103,8 +103,9 @@ Timer.prototype = {
             return ss + '.' + sss;
         } else if (format === 'ms') {
             return (ss * 1000 + sss) + '';
+        } else {
+            return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2) + '.' + sss;
         }
-        return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2) + '.' + sss;
     },
 
     /**
