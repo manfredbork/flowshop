@@ -8,3 +8,5 @@ of all operations to be performed on all jobs. Flow shop scheduling may apply as
 production facilities as to computing designs. A special type of flow shop scheduling
 problem is the permutation flow shop scheduling problem in which the processing order of
 the jobs on the resources is the same for each subsequent step of processing.
+
+Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES>
