@@ -1,14 +1,14 @@
 // Import util
 var util = require('util');
 
-// Import my files
+// Import flowshop files
 var Random = require('./src/random');
 var Importer = require('./src/importer');
 var Timer = require('./src/timer');
 var NEH = require('./src/neh');
 var IG = require('./src/ig');
 
-// Overwrite Math.random() function
+// Overwrite Math.random()
 util._extend(Math, Random.prototype);
 
 // Initialization
