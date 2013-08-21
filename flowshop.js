@@ -13,6 +13,7 @@ util._extend(Math, Random.prototype);
 
 // Initialization
 var importer = new Importer();
+var notfound = 0;
 var names = [];
 var neh = new NEH();
 var ig = new IG();
@@ -67,16 +68,19 @@ if (names.length > 0) {
             // Average rpd
             nehrpd = nehrpd + nehrun.rpd(metaData.upperBound);
             igrpd = igrpd + igrun.rpd(metaData.upperBound);
+
         } else {
 
             console.log('   File ' + name + ' not found');
             console.log('--------------------------');
+
+            notfound++;
         }
     }
 
     if (nehrpd > 0 && igrpd > 0) {
-        console.log(' Average RPD NEH UB:', (Math.round(nehrpd / names.length * 100) / 100) + '%');
-        console.log('  Average RPD IG UB:', (Math.round(igrpd / names.length * 100) / 100) + '%');
+        console.log(' Average RPD NEH UB:', (Math.round(nehrpd / (names.length - notfound) * 100) / 100) + '%');
+        console.log('  Average RPD IG UB:', (Math.round(igrpd / (names.length - notfound) * 100) / 100) + '%');
         console.log('--------------------------');
     }
 
