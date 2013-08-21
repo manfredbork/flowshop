@@ -41,6 +41,12 @@ for(var i = 0; i < arguments.length; i++) {
             '500x20': ['ta111', 'ta112', 'ta113', 'ta114', 'ta115', 'ta116', 'ta117', 'ta118', 'ta119', 'ta120']
         };
         names = names.concat(aliasMapping[arguments[i]] || []);
+    } else if (arguments[i].match(/^ms=[0-9]{1,3}$/)) {
+        ig.ms = Number(arguments[i].replace('ms=', ''));
+    } else if (arguments[i].match(/^d=[2-8]{1}$/)) {
+        ig.d = Number(arguments[i].replace('d=', ''));
+    } else if (arguments[i].match(/^T=[0-9]{1}.[0-9]{1}$/)) {
+        ig.T = Number(arguments[i].replace('T=', ''));
     } else {
         names = [];
         break;
@@ -102,6 +108,6 @@ if (names.length > 0) {
 
 } else {
 
-    console.log('Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES>');
+    console.log('Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN]');
 
 }

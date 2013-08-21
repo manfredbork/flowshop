@@ -9,4 +9,4 @@ production facilities as to computing designs. A special type of flow shop sched
 problem is the permutation flow shop scheduling problem in which the processing order of
 the jobs on the resources is the same for each subsequent step of processing.
 
-Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES>
+Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN]
