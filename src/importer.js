@@ -101,6 +101,7 @@ Importer.prototype = {
      * @param {String} name Taillard instance name
      * @private
      */
+
     _loadData: function (name) {
         var raw = [];
         var file = this._fileName(name);
@@ -169,6 +170,7 @@ Importer.prototype = {
      * @param {String} input Input
      * @private
      */
+
     _trim: function (input) {
         return input.replace(/^\s+|\s+$/g,'');
     }
