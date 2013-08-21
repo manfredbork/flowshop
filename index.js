@@ -1,4 +1,4 @@
-// Import util lib
+// Import util
 var util = require('util');
 
 // Import my files
@@ -19,9 +19,9 @@ var neh = new NEH();
 var ig = new IG();
 
 // Set initial seed
-Math.initialSeed(metaData.initialSeed + '');
+Math.initialSeed(metaData.initialSeed);
 
-// Execute algorithms
+// Run algorithms
 console.log('INSTANCE NAME', name);
 console.log(' NEH MAKESPAN', neh.run(matrixData).makespan());
 console.log('  IG MAKESPAN', ig.run(matrixData).makespan());
