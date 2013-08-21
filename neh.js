@@ -28,7 +28,7 @@ NEH.prototype.apply = function(data) {
         value = NEH.prototype.makespan(sequence);
         minSequence = sequence;
         minValue = value;
-        for(var j = 1; j <= piB.length; j++) {
+        for(var j = 1; j < sequence.length; j++) {
             sequence = Helper.toggle(sequence, j, j + 1);
             value = NEH.prototype.makespan(sequence);
             if(value < minValue) {
