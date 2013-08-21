@@ -129,11 +129,11 @@ Importer.prototype = {
                 l = 1;
                 this.cacheMeta[alias[k]] = {
                     name: alias[k],
-                    jobs: parsed[m][0],
-                    machines: parsed[m][1],
-                    initialSeed: parsed[m][2],
-                    upperBound: parsed[m][3],
-                    lowerBound: parsed[m][4]
+                    jobs: parsed[m][0] + '',
+                    machines: parsed[m][1] + '',
+                    initialSeed: parsed[m][2] + '',
+                    upperBound: parsed[m][3] + '',
+                    lowerBound: parsed[m][4] + ''
                 };
                 this.cacheMatrix[alias[k++]] = new Matrix(parsed[m][0], parsed[m][1]);
             } else {
