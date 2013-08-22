@@ -44,10 +44,13 @@ Random.prototype = {
      * Sets initial seed
      *
      * @method initialSeed
-     * @param {String} seed Initial seed
+     * @param {String|Number} seed Initial seed
      */
 
     initialSeed: function (seed) {
+        if (typeof seed === 'number') {
+            seed = this._longToKey(seed);
+        }
         this.i = 0;
         this.j = 0;
         this.keystream = this._keystream(seed);
@@ -73,11 +76,31 @@ Random.prototype = {
 //////////////////////////////// Private Random methods ////////////////////////////////
 
     /**
+     * Converts long number to key
+     *
+     * @method _longToKey
+     * @param {Number} num Long number
+     * @return {String} Key
+     * @private
+     */
+
+    _longToKey: function (num) {
+        var key = '';
+        for(var i = 0; i < 8; i++) {
+            var ch = num & 0xff;
+            key = key + String.fromCharCode(ch);
+            num = (num - ch) / 256;
+        }
+        return key;
+    },
+
+    /**
      * The key-scheduling algorithm
      *
      * @method _keystream
      * @param {String} key Key
      * @return {Array} Keystream
+     * @private
      */
 
     _keystream: function (key) {
@@ -100,6 +123,7 @@ Random.prototype = {
      *
      * @method _randomByte
      * @return {Number} Random byte
+     * @private
      */
 
     _randomByte: function () {
