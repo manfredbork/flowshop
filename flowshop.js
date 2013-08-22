@@ -12,7 +12,7 @@ var IG = require('./src/ig');
 util._extend(Math, Random.prototype);
 
 // Initialization
-var importer = new Importer();
+var importer = new Importer(__dirname);
 var notfound = 0;
 var names = [];
 var neh = new NEH();

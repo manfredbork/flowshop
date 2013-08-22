@@ -31,7 +31,8 @@ var Matrix = require('./Matrix');
  * @constructor
  */
 
-var Importer = function () {
+var Importer = function (path) {
+    this.path = path;
 };
 
 /**
@@ -106,7 +107,7 @@ Importer.prototype = {
         var raw = [];
         var file = this._fileName(name);
         try {
-            raw = fs.readFileSync('taillard/' + file).toString()
+            raw = fs.readFileSync(this.path + '/taillard/' + file).toString()
                     .split(String.fromCharCode(13) + String.fromCharCode(10));
         } catch (err) {
         }
