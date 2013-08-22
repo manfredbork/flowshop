@@ -53,6 +53,8 @@ for(var i = 0; i < arguments.length; i++) {
     }
 }
 
+var total = new Timer();
+
 if (names.length > 0) {
 
     console.log('--------------------------');
@@ -72,19 +74,20 @@ if (names.length > 0) {
             Math.initialSeed(metaData.initialSeed);
 
             // Run algorithms
-            var timer = new Timer();
+            var elapsed = new Timer();
             var nehrun = neh.run(matrixData);
             var igrun = ig.run(matrixData);
 
             console.log('          Name:', metaData.name);
             console.log('          Jobs:', metaData.jobs);
             console.log('      Machines:', metaData.machines);
-            console.log('   Upper bound:', metaData.upperBound);
+            console.log('            LB:', metaData.lowerBound);
+            console.log('            UB:', metaData.upperBound);
             console.log('  NEH Makespan:', nehrun.makespan());
-            console.log('    RPD NEH UB:', nehrun.rpd(metaData.upperBound) + '%');
             console.log('   IG Makespan:', igrun.makespan());
+            console.log('    RPD NEH UB:', nehrun.rpd(metaData.upperBound) + '%');
             console.log('     RPD IG UB:', igrun.rpd(metaData.upperBound) + '%');
-            console.log('  Elapsed time:', timer.elapsedTime('mm:ss') + ' mins');
+            console.log('  Elapsed time:', elapsed.elapsedTime('mm:ss') + ' mins');
             console.log('--------------------------');
 
             // Average rpd
@@ -104,10 +107,36 @@ if (names.length > 0) {
         console.log(' Average RPD NEH UB:', (Math.round(nehrpd / (names.length - notfound) * 100) / 100) + '%');
         console.log('  Average RPD IG UB:', (Math.round(igrpd / (names.length - notfound) * 100) / 100) + '%');
         console.log('--------------------------');
+        console.log('    Total time:', total.elapsedTime('mm:ss') + ' mins');
+        console.log('--------------------------');
     }
 
 } else {
 
+    console.log();
+    console.log('Glossary');
+    console.log('========');
+    console.log('Makespan: Time between start and finish of a sequence of jobs');
+    console.log('LB: Makespan best solution Lower Bound');
+    console.log('UB: Makespan best solution Upper Bound');
+    console.log('NEH: Algorithm by Nawaz, Enscore, Ham');
+    console.log('IG: Iterated Greedy algorithm');
+    console.log('RPD: Relative Percentage Deviation');
+    console.log();
+    console.log('Hints');
+    console.log('=====');
+    console.log('Available Taillard instance names are ta001, ta002, ta003, ta004, ta005 etc.');
+    console.log('Available alias names for multiple Taillard instances are 20x5, 20x10, 20x20 etc.');
+    console.log('Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5');
+    console.log('Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8');
+    console.log('Common values for parameter ms of IG algorithm are 20 and 60');
+    console.log();
+    console.log('Examples');
+    console.log('========');
+    console.log('node flowshop 20x5 20x10');
+    console.log('node flowshop ta001 ta002 ta003');
+    console.log('node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20');
+    console.log();
     console.log('Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN]');
 
 }
