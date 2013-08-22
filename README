@@ -1,3 +1,11 @@
+       _______  ___      _______  _     _  _______  __   __  _______  _______
+      |       ||   |    |       || | _ | ||       ||  | |  ||       ||       |
+      |    ___||   |    |   _   || || || ||  _____||  |_|  ||   _   ||    _  |
+      |   |___ |   |    |  | |  ||       || |_____ |       ||  | |  ||   |_| |
+      |    ___||   |___ |  |_|  ||       ||_____  ||       ||  |_|  ||    ___|
+      |   |    |       ||       ||   _   | _____| ||   _   ||       ||   |
+      |___|    |_______||_______||__| |__||_______||__| |__||_______||___|
+
 Flow shop scheduling problems, are a class of scheduling problems with a work shop or
 group shop in which the flow control shall enable an appropriate sequencing for each job
 and for processing on a set of machines or with other resources 1,2,...,m in compliance
@@ -33,4 +41,4 @@ node flowshop 20x5 20x10
 node flowshop ta001 ta002 ta003 R=on
 node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
 
-Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [R=on|off]
+Usage: node flowshop <TAILLARD INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [R=on|off]
