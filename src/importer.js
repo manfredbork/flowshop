@@ -29,6 +29,7 @@ var Matrix = require('./Matrix');
 
 /**
  * @constructor
+ * @param {String} path Current file path
  */
 
 var Importer = function (path) {
