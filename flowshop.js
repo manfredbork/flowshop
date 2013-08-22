@@ -43,7 +43,7 @@ for(var i = 0; i < arguments.length; i++) {
         names = names.concat(aliasMapping[arguments[i]] || []);
     } else if (arguments[i].match(/^ms=[0-9]{1,3}$/)) {
         ig.ms = Number(arguments[i].replace('ms=', ''));
-    } else if (arguments[i].match(/^d=[2-8]{1}$/)) {
+    } else if (arguments[i].match(/^d=[0-9]{1}$/)) {
         ig.d = Number(arguments[i].replace('d=', ''));
     } else if (arguments[i].match(/^T=[0-9]{1}.[0-9]{1}$/)) {
         ig.T = Number(arguments[i].replace('T=', ''));
