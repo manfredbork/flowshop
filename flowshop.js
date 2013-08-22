@@ -132,12 +132,12 @@ if (names.length > 0) {
     console.log();
     console.log('Hints');
     console.log('=====');
-    console.log('Available Taillard instance names are ta001, ta002, ta003, ta004, ta005 etc.');
-    console.log('Available alias names for multiple Taillard instances are 20x5, 20x10, 20x20 etc.');
+    console.log('Existing Taillard instances are ta001, ta002, ta003, ta004, ta005, ta006 etc.');
+    console.log('Existing alias names for multiple Taillard instances are 20x5, 20x10, 20x20 etc.');
     console.log('Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5');
     console.log('Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8');
     console.log('Common values for parameter ms of IG algorithm are 20 and 60');
-    console.log('Switching parameter R to on changes behaviour from pseudo to real randomness');
+    console.log('Switching on parameter R to change behaviour from pseudo to real randomness');
     console.log();
     console.log('Examples');
     console.log('========');
