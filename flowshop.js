@@ -8,9 +8,6 @@ var Timer = require('./src/timer');
 var NEH = require('./src/neh');
 var IG = require('./src/ig');
 
-// Overwrite Math.random()
-util._extend(Math, Random.prototype);
-
 // Initialization
 var importer = new Importer(__dirname);
 var notfound = 0;
@@ -19,6 +16,7 @@ var neh = new NEH();
 var ig = new IG();
 var nehrpd = 0;
 var igrpd = 0;
+var seed = true;
 
 // Read arguments
 var arguments = process.argv.splice(2);
@@ -47,10 +45,17 @@ for(var i = 0; i < arguments.length; i++) {
         ig.d = Number(arguments[i].replace('d=', ''));
     } else if (arguments[i].match(/^T=[0-9]{1}.[0-9]{1}$/)) {
         ig.T = Number(arguments[i].replace('T=', ''));
+    } else if (arguments[i].match(/^R=on$|^R=off$/)) {
+        seed = arguments[i].replace('R=', '') === 'off';
     } else {
         names = [];
         break;
     }
+}
+
+// Overwrite Math.random()
+if (seed === true) {
+    util._extend(Math, Random.prototype);
 }
 
 var total = new Timer();
@@ -71,7 +76,9 @@ if (names.length > 0) {
         if (metaData) {
 
             // Set initial seed
-            Math.initialSeed(metaData.initialSeed);
+            if (seed === true) {
+                Math.initialSeed(metaData.initialSeed);
+            }
 
             // Run algorithms
             var elapsed = new Timer();
@@ -130,13 +137,14 @@ if (names.length > 0) {
     console.log('Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5');
     console.log('Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8');
     console.log('Common values for parameter ms of IG algorithm are 20 and 60');
+    console.log('Switching parameter R to on changes behaviour from pseudo to real randomness');
     console.log();
     console.log('Examples');
     console.log('========');
     console.log('node flowshop 20x5 20x10');
-    console.log('node flowshop ta001 ta002 ta003');
+    console.log('node flowshop ta001 ta002 ta003 R=on');
     console.log('node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20');
     console.log();
-    console.log('Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN]');
+    console.log('Usage: node flowshop <TAILLARD INSTANCE NAMES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [R=on|off]');
 
 }
