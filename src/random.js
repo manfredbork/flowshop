@@ -49,7 +49,7 @@ Random.prototype = {
 
     initialSeed: function (seed) {
         if (typeof seed === 'number') {
-            seed = this._longToKey(seed);
+            seed = '' + seed;
         }
         this.i = 0;
         this.j = 0;
@@ -74,25 +74,6 @@ Random.prototype = {
     },
 
 //////////////////////////////// Private Random methods ////////////////////////////////
-
-    /**
-     * Converts long number to key
-     *
-     * @method _longToKey
-     * @param {Number} num Long number
-     * @return {String} Key
-     * @private
-     */
-
-    _longToKey: function (num) {
-        var key = '';
-        for(var i = 0; i < 8; i++) {
-            var ch = num & 0xff;
-            key = key + String.fromCharCode(ch);
-            num = (num - ch) / 256;
-        }
-        return key;
-    },
 
     /**
      * The key-scheduling algorithm
