@@ -88,7 +88,7 @@ Random.prototype = {
     _longToHex: function (n) {
         var key = '';
         var hex = '0123456789ABCDEF';
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < 16; i++) {
             var ch = n & 0xf;
             key = hex.charAt(ch) + key;
             n = (n - ch) / 16;
