@@ -93,7 +93,7 @@ Random.prototype = {
             key = hex.charAt(ch) + key;
             n = (n - ch) / 16;
         }
-        return key;
+        return key.replace(/^0+/, '');
     },
 
     /**
