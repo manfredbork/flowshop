@@ -16,7 +16,7 @@ var neh = new NEH();
 var ig = new IG();
 var nehrpd = 0;
 var igrpd = 0;
-var seed = true;
+var seed = 'default';
 
 // Read arguments
 var arguments = process.argv.splice(2);
@@ -45,8 +45,13 @@ for(var i = 0; i < arguments.length; i++) {
         ig.d = Number(arguments[i].replace('d=', ''));
     } else if (arguments[i].match(/^T=[0-9]{1}.[0-9]{1}$/)) {
         ig.T = Number(arguments[i].replace('T=', ''));
-    } else if (arguments[i].match(/^R=on$|^R=off$/)) {
-        seed = arguments[i].replace('R=', '') === 'off';
+    } else if (arguments[i].match(/^seed=[0-9]{1,10}$|^seed=auto$|^seed=default$/)) {
+        var arg = arguments[i].replace('seed=', '');
+        if (arg === 'auto' || arg === 'default') {
+            seed = arg;
+        } else {
+            seed = Number(arg);
+        }
     } else {
         names = [];
         break;
@@ -54,9 +59,11 @@ for(var i = 0; i < arguments.length; i++) {
 }
 
 // Overwrite Math.random()
-if (seed === true) {
-    util._extend(Math, Random.prototype);
-}
+var BasicMath = {
+    floor: Math.floor,
+    random: Math.random
+};
+util._extend(Math, Random.prototype);
 
 var total = new Timer();
 
@@ -75,10 +82,17 @@ if (names.length > 0) {
 
         if (metaData) {
 
-            // Set initial seed
-            if (seed === true) {
-                Math.initialSeed(metaData.initialSeed);
+            // Auto initial seed
+            if (seed === 'auto') {
+                metaData.initialSeed = BasicMath.floor(BasicMath.random() * 9999999999);
+            } else if (seed === 'default'){
+                metaData.initialSeed = Number(metaData.initialSeed);
+            } else {
+                metaData.initialSeed = seed;
             }
+
+            // Set initial seed
+            Math.initialSeed(metaData.initialSeed);
 
             // Run algorithms
             var elapsed = new Timer();
@@ -86,6 +100,7 @@ if (names.length > 0) {
             var igrun = ig.run(matrixData);
 
             console.log('          Name:', metaData.name);
+            console.log('  Initial seed:', metaData.initialSeed);
             console.log('          Jobs:', metaData.jobs);
             console.log('      Machines:', metaData.machines);
             console.log('            LB:', metaData.lowerBound);
@@ -137,14 +152,14 @@ if (names.length > 0) {
     console.log('Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5');
     console.log('Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8');
     console.log('Common values for parameter ms of IG algorithm are 20 and 60');
-    console.log('Switching on parameter R to change behaviour from pseudo to real randomness');
+    console.log('Set 10-digit number to overwrite initial seed or set to auto for random initial seed');
     console.log();
     console.log('Examples');
     console.log('========');
-    console.log('node flowshop 20x5 20x10');
-    console.log('node flowshop ta001 ta002 ta003 R=on');
+    console.log('node flowshop 20x5 20x10 seed=auto');
+    console.log('node flowshop ta001 ta002 ta003 seed=1234567890');
     console.log('node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20');
     console.log();
-    console.log('Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [R=on|off]');
+    console.log('Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [seed=10-DIGIT|auto|default]');
 
 }
