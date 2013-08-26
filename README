@@ -1,3 +1,4 @@
+<pre>
     _______ ___       ______   __   __  ___  ________ __    __    ______   _______
    /"     "|"  |     /    " \ |"  |/  \|  "|/"       )" |  | "\  /    " \ |   __ "\
   (: ______)|  |    // ____  \|'  /    \:  (:   \___(:  (__)  :)// ____  \(. |__) :)
@@ -6,6 +7,7 @@
   (:  (    ( \_|:  \        /  /   /  \\   |/" \   :|:  (  )  :)        //|__/ \
    \__/     \_______)"_____/  |___/    \___(_______/ \__|  |__/ \"_____/(_______)
 
+</pre>
 Flow shop scheduling problems, are a class of scheduling problems with a work shop or
 group shop in which the flow control shall enable an appropriate sequencing for each
 job and for processing on a set of machines or with other resources 1,2,...,m in
@@ -42,4 +44,4 @@ node flowshop 20x5 20x10
 node flowshop ta001 ta002 ta003 R=on
 node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
 
-Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [R=on|off]
+Usage: node flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNN] [R=on|off]
