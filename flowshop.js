@@ -160,6 +160,7 @@ if (names.length > 0) {
     console.log('node flowshop ta001 ta002 ta003 seed=1234567890');
     console.log('node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20');
     console.log();
-    console.log('Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [seed=D10|auto|default]');
+    console.log('Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN]');
+    console.log('                                                     [seed=NNNNNNNNNN|auto|default]');
 
 }
