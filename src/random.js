@@ -50,11 +50,7 @@ Random.prototype = {
     initialSeed: function (seed) {
         this.i = 0;
         this.j = 0;
-        if (typeof seed === 'number') {
-            this.keystream = this._keystream(this._longToHex(seed));
-        } else {
-            this.keystream = this._keystream(seed);
-        }
+        this.keystream = this._keystream('' + seed);
     },
 
     /**
@@ -75,26 +71,6 @@ Random.prototype = {
     },
 
 //////////////////////////////// Private Random methods ////////////////////////////////
-
-    /**
-     * Converts 64-bit unsigned long to hexadecimal
-     *
-     * @method _longToHex
-     * @param {Number} n 64-bit unsigned long
-     * @return {String} Hexadecimal
-     * @private
-     */
-
-    _longToHex: function (n) {
-        var key = '';
-        var hex = '0123456789ABCDEF';
-        for (var i = 0; i < 16; i++) {
-            var ch = n & 0xf;
-            key = hex.charAt(ch) + key;
-            n = (n - ch) / 16;
-        }
-        return key.replace(/^0+/, '');
-    },
 
     /**
      * The key-scheduling algorithm
