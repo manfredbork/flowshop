@@ -34,5 +34,5 @@ node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
 </pre>
 
 <pre>
-Usage: node flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNN] [seed=10-DIGIT|auto|default]
+Usage: node flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNN] [seed=D10|auto|default]
 </pre>
