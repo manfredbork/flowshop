@@ -24,16 +24,16 @@ Flow shop scheduling problems, are a class of scheduling problems with a work sh
 * Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5
 * Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8
 * Common values for parameter ms of IG algorithm are 20 and 60
-* Set 10-digit number to overwrite initial seed or set to auto for random initial seed
+* Set array of 10-digit numbers to overwrite initial seeds
 
 # Examples
 <pre>
 node flowshop 20x5 20x10 seed=auto
-node flowshop ta001 ta002 ta003 seed=1234567890
+node flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]
 node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
 </pre>
 
 <pre>
 Usage: node flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNN]
-                                                     [seed=NNNNNNNNNN|auto|default]
+                                                     [seed=[S0,S1,...,Sn]|auto|default]
 </pre>

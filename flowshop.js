@@ -45,12 +45,16 @@ for(var i = 0; i < arguments.length; i++) {
         ig.d = Number(arguments[i].replace('d=', ''));
     } else if (arguments[i].match(/^T=[0-9]{1}.[0-9]{1}$/)) {
         ig.T = Number(arguments[i].replace('T=', ''));
-    } else if (arguments[i].match(/^seed=[0-9]{1,10}$|^seed=auto$|^seed=default$/)) {
+    } else if (arguments[i].match(/^seed=[[0-9,]+]$|^seed=auto$|^seed=default$/)) {
         var arg = arguments[i].replace('seed=', '');
         if (arg === 'auto' || arg === 'default') {
             seed = arg;
         } else {
-            seed = Number(arg);
+            try {
+                seed = JSON.parse(arg);
+            } catch (err) {
+                names = [];
+            }
         }
     } else {
         names = [];
@@ -85,8 +89,8 @@ if (names.length > 0) {
             // Auto initial seed
             if (seed === 'auto') {
                 metaData.initialSeed = BasicMath.floor(BasicMath.random() * 9999999999);
-            } else if (seed !== 'default' && seed > 0) {
-                metaData.initialSeed = seed;
+            } else if (util.isArray(seed) && seed[j] > 0) {
+                metaData.initialSeed = seed[j];
             }
 
             // Set initial seed
@@ -150,15 +154,15 @@ if (names.length > 0) {
     console.log('Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5');
     console.log('Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8');
     console.log('Common values for parameter ms of IG algorithm are 20 and 60');
-    console.log('Set 10-digit number to overwrite initial seed or set to auto for random initial seed');
+    console.log('Set array of 10-digit numbers to overwrite initial seeds');
     console.log();
     console.log('Examples');
     console.log('========');
     console.log('node flowshop 20x5 20x10 seed=auto');
-    console.log('node flowshop ta001 ta002 ta003 seed=1234567890');
+    console.log('node flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]');
     console.log('node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20');
     console.log();
     console.log('Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN]');
-    console.log('                                                     [seed=NNNNNNNNNN|auto|default]');
+    console.log('                                                     [seed=[S0,S1,...,Sn]|auto|default]');
 
 }
