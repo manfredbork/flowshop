@@ -20,25 +20,29 @@ special type of flow shop scheduling problem is the permutation flow shop schedu
 problem in which the processing order of the jobs on the resources is the same for
 each subsequent step of processing.
 
-# Glossary
-Makespan: Time between start and finish of a sequence of jobs
-LB: Makespan best solution Lower Bound
-UB: Makespan best solution Upper Bound
-NEH: Algorithm by Nawaz, Enscore, Ham
-IG: Iterated Greedy algorithm
-RPD: Relative Percentage Deviation
+### Glossary
+* Makespan: Time between start and finish of a sequence of jobs
+* LB: Makespan best solution Lower Bound
+* UB: Makespan best solution Upper Bound
+* NEH: Algorithm by Nawaz, Enscore, Ham
+* IG: Iterated Greedy algorithm
+* RPD: Relative Percentage Deviation
 
-# Hints
-Existing Taillard instances are ta001, ta002, ta003, ta004, ta005, ta006 etc.
-Existing alias names for multiple Taillard instances are 20x5, 20x10, 20x20 etc.
-Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5
-Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8
-Common values for parameter ms of IG algorithm are 20 and 60
-Switching on parameter R to change behaviour from pseudo to real randomness
+### Hints
+* Existing Taillard instances are ta001, ta002, ta003, ta004, ta005, ta006 etc.
+* Existing alias names for multiple Taillard instances are 20x5, 20x10, 20x20 etc.
+* Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5
+* Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8
+* Common values for parameter ms of IG algorithm are 20 and 60
+* Switching on parameter R to change behaviour from pseudo to real randomness
 
-# Examples
+### Examples
+<pre>
 node flowshop 20x5 20x10
 node flowshop ta001 ta002 ta003 R=on
 node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
+</pre>
 
+<pre>
 Usage: node flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNN] [R=on|off]
+</pre>
