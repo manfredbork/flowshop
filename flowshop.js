@@ -85,9 +85,7 @@ if (names.length > 0) {
             // Auto initial seed
             if (seed === 'auto') {
                 metaData.initialSeed = BasicMath.floor(BasicMath.random() * 9999999999);
-            } else if (seed === 'default'){
-                metaData.initialSeed = Number(metaData.initialSeed);
-            } else {
+            } else if (seed !== 'default' && seed > 0) {
                 metaData.initialSeed = seed;
             }
 
