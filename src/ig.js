@@ -174,6 +174,7 @@ IG.prototype = {
 
         // Repeat until termination time is reached
         while (PItimer.elapsedTime('ms') < this.terminationTime(T)) {
+
             // Destruction phase
             PIr = new Matrix(0, PI.dim());
             PIi = PI.clone();
