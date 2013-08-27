@@ -251,6 +251,22 @@ Matrix.prototype = {
     },
 
     /**
+     * Returns permutation of matrix
+     *
+     * @method permutation
+     * @param {Matrix} matrix Original matrix
+     * @return {String} Permutation
+     */
+
+    permutation: function (matrix) {
+        var perm = [];
+        for(var i = 0; i < matrix.len(); i++) {
+            perm[i] = this.position(matrix.M[i]);
+        }
+        return perm.join(' ');
+    },
+
+    /**
      * Gets position of column data within matrix
      *
      * @method position
