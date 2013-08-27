@@ -102,14 +102,14 @@ if (names.length > 0) {
             var igrun = ig.run(matrixData);
 
             console.log('          Name:', metaData.name);
-            console.log('  Initial seed:', metaData.initialSeed);
+            console.log('  Initial Seed:', metaData.initialSeed);
             console.log('          Jobs:', metaData.jobs);
             console.log('      Machines:', metaData.machines);
             console.log('            LB:', metaData.lowerBound);
             console.log('            UB:', metaData.upperBound);
             console.log('  NEH Makespan:', nehrun.makespan());
             console.log('   IG Makespan:', igrun.makespan());
-            console.log('IG permutation:', igrun.permutation(matrixData));
+            console.log('IG Permutation:', igrun.permutation(matrixData));
             console.log('    RPD NEH UB:', nehrun.rpd(metaData.upperBound) + '%');
             console.log('     RPD IG UB:', igrun.rpd(metaData.upperBound) + '%');
             console.log('  Elapsed time:', elapsed.elapsedTime('mm:ss') + ' mins');
