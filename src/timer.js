@@ -76,11 +76,10 @@ Timer.prototype = {
      */
 
     _formatTime: function (time, format) {
-        var date = new Date(time);
-        var hh = date.getUTCHours();
-        var mm = date.getUTCMinutes();
-        var ss = date.getUTCSeconds();
-        var sss = date.getUTCMilliseconds();
+        var hh = Math.floor(time / 3600000);
+        var mm = Math.floor((time - hh * 3600000) / 60000);
+        var ss = Math.floor((time - hh * 3600000 - mm * 60000) / 1000);
+        var sss = time - hh * 3600000 - mm * 60000 - ss * 1000;
         if (format === 'hh:mm:ss') {
             return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2);
         } else if (format === 'mm:ss') {
@@ -90,7 +89,7 @@ Timer.prototype = {
         } else if (format === 'ss.sss') {
             return (hh * 3600 + mm * 60 + ss) + '.' + sss;
         } else if (format === 'ms') {
-            return (hh * 3600000 * mm * 60000 + ss * 1000 + sss) + '';
+            return (hh * 3600000 + mm * 60000 + ss * 1000 + sss) + '';
         } else {
             return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2) + '.' + sss;
         }
