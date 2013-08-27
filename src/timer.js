@@ -90,7 +90,7 @@ Timer.prototype = {
         } else if (format === 'ss.sss') {
             return (hh * 3600 + mm * 60 + ss) + '.' + sss;
         } else if (format === 'ms') {
-            return (hh * 3600000 *mm * 60000 + ss * 1000 + sss) + '';
+            return (hh * 3600000 * mm * 60000 + ss * 1000 + sss) + '';
         } else {
             return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2) + '.' + sss;
         }
