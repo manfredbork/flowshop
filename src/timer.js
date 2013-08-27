@@ -48,19 +48,7 @@ Timer.prototype = {
      */
 
     init: function () {
-        this.D = this.E = process.hrtime();
-    },
-
-    /**
-     * Reads time difference since last diff
-     *
-     * @method diffTime
-     * @param {String} format Time format
-     * @return {String} Formatted time
-     */
-
-    diffTime: function (format) {
-        return this._formatTime(this._diffTimeInMilliseconds(), format);
+        this.E = process.hrtime();
     },
 
     /**
@@ -96,13 +84,13 @@ Timer.prototype = {
         if (format === 'hh:mm:ss') {
             return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2);
         } else if (format === 'mm:ss') {
-            return mm + ':' + this._zeroPad(ss, 2);
+            return (hh * 60 + mm) + ':' + this._zeroPad(ss, 2);
         } else if (format === 'mm:ss.sss') {
-            return mm + ':' + this._zeroPad(ss, 2) + '.' + sss;
+            return (hh * 60 + mm) + ':' + this._zeroPad(ss, 2) + '.' + sss;
         } else if (format === 'ss.sss') {
-            return ss + '.' + sss;
+            return (hh * 3600 + mm * 60 + ss) + '.' + sss;
         } else if (format === 'ms') {
-            return (ss * 1000 + sss) + '';
+            return (hh * 3600000 *mm * 60000 + ss * 1000 + sss) + '';
         } else {
             return hh + ':' + this._zeroPad(mm, 2) + ':' + this._zeroPad(ss, 2) + '.' + sss;
         }
@@ -124,20 +112,6 @@ Timer.prototype = {
             output = '0' + output;
         }
         return output;
-    },
-
-    /**
-     * Reads time difference since last diff
-     *
-     * @method _diffTimeInMilliseconds
-     * @return {Number} Milliseconds
-     * @private
-     */
-
-    _diffTimeInMilliseconds: function () {
-        var init = this.D;
-        var now = this.D = process.hrtime();
-        return Math.floor((now[0] - init[0]) * 1000 + (now[1] - init[1]) / 1000000);
     },
 
     /**
