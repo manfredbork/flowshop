@@ -109,9 +109,9 @@ if (names.length > 0) {
             console.log('            UB:', metaData.upperBound);
             console.log('  NEH Makespan:', nehrun.makespan());
             console.log('   IG Makespan:', igrun.makespan());
+            console.log('IG permutation:', igrun.permutation(matrixData));
             console.log('    RPD NEH UB:', nehrun.rpd(metaData.upperBound) + '%');
             console.log('     RPD IG UB:', igrun.rpd(metaData.upperBound) + '%');
-            console.log('IG permutation:', igrun.permutation(matrixData));
             console.log('  Elapsed time:', elapsed.elapsedTime('mm:ss') + ' mins');
             console.log('--------------------------');
 
