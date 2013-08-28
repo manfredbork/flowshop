@@ -82,6 +82,10 @@ while (repeat > 0) {
 
     var total = new Timer();
 
+    nehrpd = 0;
+    igrpd = 0;
+    notfound = 0;
+
     if (names.length > 0) {
 
         for(var j = 0; j < names.length; j++) {
@@ -181,8 +185,6 @@ while (repeat > 0) {
         console.log('                                                     [seed=[S0,S1,...,Sn]|auto|default]');
 
     }
-    nehrpd = 0;
-    igrpd = 0;
     repeat--;
     iteration++;
 }
