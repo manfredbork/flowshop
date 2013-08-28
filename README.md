@@ -28,12 +28,12 @@ Flow shop scheduling problems, are a class of scheduling problems with a work sh
 
 # Examples
 <pre>
-node flowshop 20x5 20x10 seed=auto
+node flowshop 20x5 20x10 repeat=2 seed=auto
 node flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]
 node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
 </pre>
 
 <pre>
-Usage: node flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNN]
+Usage: node flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNN] [repeat=N]
                                                      [seed=[S0,S1,...,Sn]|auto|default]
 </pre>
