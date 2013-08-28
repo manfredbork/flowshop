@@ -88,8 +88,8 @@ Random.prototype = {
             S[i] = i;
         }
         for(var k = 0; k < 256; k++) {
+            j = (j + S[k] + key[k % key.length].charCodeAt(0)) % 256;
             var swap = S[k];
-            j = (j + swap + key[k % key.length].charCodeAt(0)) % 256;
             S[k] = S[j];
             S[j] = swap;
         }
@@ -105,9 +105,9 @@ Random.prototype = {
      */
 
     _randomByte: function () {
-        var swap = this.keystream[this.i];
         this.i = (this.i + 1) % 256;
-        this.j = (this.j + swap) % 256;
+        this.j = (this.j + this.keystream[this.i]) % 256;
+        var swap = this.keystream[this.i];
         this.keystream[this.i] = this.keystream[this.j];
         this.keystream[this.j] = swap;
         return this.keystream[(this.keystream[this.i] + this.keystream[this.j]) % 256];
