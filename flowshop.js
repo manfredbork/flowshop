@@ -130,8 +130,8 @@ while (repeat > 0) {
                 console.log('  NEH Makespan:', nehrun.makespan());
                 console.log('   IG Makespan:', igrun.makespan());
                 console.log('IG Permutation:', igrun.permutation(matrixData));
-                console.log('    RPD NEH UB:', nehrun.rpd(metaData.upperBound) + '%');
-                console.log('     RPD IG UB:', igrun.rpd(metaData.upperBound) + '%');
+                console.log('    RPD NEH UB:', (Math.round(nehrun.rpd(metaData.upperBound) * 100) / 100) + '%');
+                console.log('     RPD IG UB:', (Math.round(igrun.rpd(metaData.upperBound) * 100) / 100) + '%');
                 console.log('  Elapsed time:', elapsed.elapsedTime('mm:ss') + ' mins');
                 console.log('--------------------------');
 

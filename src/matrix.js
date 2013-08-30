@@ -247,7 +247,7 @@ Matrix.prototype = {
      * @return {Number} Relative percentage deviation
      */
     rpd: function (best) {
-        return Math.round((this.makespan() - best) / best * 10000) / 100;
+        return (this.makespan() - best) / best * 100;
     },
 
     /**
