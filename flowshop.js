@@ -40,7 +40,7 @@ for(var i = 0; i < arguments.length; i++) {
             '500x20': ['ta111', 'ta112', 'ta113', 'ta114', 'ta115', 'ta116', 'ta117', 'ta118', 'ta119', 'ta120']
         };
         names = names.concat(aliasMapping[arguments[i]] || []);
-    } else if (arguments[i].match(/^ms=[0-9]{1,3}$/)) {
+    } else if (arguments[i].match(/^ms=[0-9]{1,4}$/)) {
         ig.ms = Number(arguments[i].replace('ms=', ''));
     } else if (arguments[i].match(/^d=[0-9]{1}$/)) {
         ig.d = Number(arguments[i].replace('d=', ''));
@@ -183,8 +183,8 @@ while (repeat > 0) {
         console.log('node flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]');
         console.log('node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20');
         console.log();
-        console.log('Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNN] [repeat=NN]');
-        console.log('                                                     [seed=[S0,S1,...,Sn]|auto|default]');
+        console.log('Usage: node flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNNN] [repeat=NN]');
+        console.log('                                                     [seed=[S1,S2,...,Sn]|auto|default]');
 
     }
     repeat--;
