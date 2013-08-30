@@ -72,10 +72,6 @@ var BasicMath = {
 };
 util._extend(Math, Random.prototype);
 
-console.log('--------------------------');
-console.log('       Processing...      ');
-console.log('--------------------------');
-
 var iteration = 1;
 
 while (repeat > 0) {
@@ -87,6 +83,12 @@ while (repeat > 0) {
     notfound = 0;
 
     if (names.length > 0) {
+
+        if (iteration === 1) {
+            console.log('--------------------------');
+            console.log('       Processing...      ');
+            console.log('--------------------------');
+        }
 
         for(var j = 0; j < names.length; j++) {
 
