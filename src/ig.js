@@ -178,7 +178,7 @@ IG.prototype = {
             // Destruction phase
             PIr = new Matrix(0, PI.dim());
             PIi = PI.clone();
-            for(var i = 1; i <= Math.min(this.d, PI.len()); i++) {
+            for(var i = 1; i <= this.d; i++) {
                 PIrand = Math.floor(Math.random() * PI.len()) + 1;
                 PIitem = PIi.read(PIrand);
                 PIi.remove(PIrand);
