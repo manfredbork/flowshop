@@ -191,8 +191,8 @@ IG.prototype = {
                 PIval = PIseq.makespan();
                 PIminseq = PIseq.clone();
                 PIminval = PIval;
-                for(var k = 1; k < PIr.len(); k++) {
-                    PIseq.toggle(j, j + 1);
+                for(var k = 1; k < PIseq.len(); k++) {
+                    PIseq.toggle(k, k + 1);
                     PIval = PIseq.makespan();
                     if (PIval < PIminval) {
                         PIminseq = PIseq.clone();
