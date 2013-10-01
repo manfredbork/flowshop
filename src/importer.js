@@ -174,7 +174,7 @@ Importer.prototype = {
      */
 
     _trim: function (input) {
-        return input.replace(/^\s+|\s+$/g,'');
+        return input.replace(/^\s+|\s+$/g, '');
     }
 };
 

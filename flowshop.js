@@ -115,10 +115,12 @@ while (repeat > 0) {
                 var igrun = ig.run(matrixData);
 
                 if (iteration > 1) {
+
                     console.log();
                     console.log('--------------------------');
                     console.log('       ' + iteration + '. Iteration');
                     console.log('--------------------------');
+
                 }
 
                 console.log('          Name:', metaData.name);
@@ -143,17 +145,18 @@ while (repeat > 0) {
 
                 console.log('   File ' + name + ' not found');
                 console.log('--------------------------');
-
                 notfound++;
             }
         }
 
         if (nehrpd > 0 && igrpd > 0) {
+
             console.log(' Average RPD NEH UB:', (Math.round(nehrpd / (names.length - notfound) * 100) / 100) + '%');
             console.log('  Average RPD IG UB:', (Math.round(igrpd / (names.length - notfound) * 100) / 100) + '%');
             console.log('--------------------------');
             console.log('    Total time:', total.elapsedTime('mm:ss') + ' mins');
             console.log('--------------------------');
+
         }
 
     } else {

@@ -261,7 +261,7 @@ Matrix.prototype = {
     permutation: function (matrix) {
         var perm = [];
         for(var i = 0; i < matrix.len(); i++) {
-            perm[i] = this.position(matrix.M[i]);
+            perm[i] = matrix.position(this.M[i]);
         }
         return perm.join(' ');
     },
