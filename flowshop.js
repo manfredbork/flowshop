@@ -85,9 +85,11 @@ while (repeat > 0) {
     if (names.length > 0) {
 
         if (iteration === 1) {
+
             console.log('--------------------------');
             console.log('       Processing...      ');
             console.log('--------------------------');
+
         }
 
         for(var j = 0; j < names.length; j++) {
