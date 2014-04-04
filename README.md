@@ -28,9 +28,9 @@ Flow shop scheduling problems, are a class of scheduling problems with a work sh
 
 # Examples
 <pre>
-node flowshop 20x5 20x10 repeat=2 seed=auto
-node flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]
-node flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
+flowshop 20x5 20x10 repeat=2 seed=auto
+flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]
+flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
 </pre>
 
 <pre>
