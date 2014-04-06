@@ -70,6 +70,7 @@ var BasicMath = {
     floor: Math.floor,
     random: Math.random
 };
+
 util._extend(Math, Random.prototype);
 
 var iteration = 1;
