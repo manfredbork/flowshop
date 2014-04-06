@@ -190,7 +190,7 @@ while (repeat > 0) {
         console.log('flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20');
         console.log();
         console.log('Usage: flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNNN]');
-        console.log('                                                [repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]');
+        console.log('                [repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]');
 
     }
     repeat--;

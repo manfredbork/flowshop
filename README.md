@@ -35,5 +35,5 @@ flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
 
 <pre>
 Usage: flowshop &lt;INSTANCES SEPARATED BY SPACES&gt; [T=N.N] [d=N] [ms=NNNN]
-                                                [repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]
+                [repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]
 </pre>
