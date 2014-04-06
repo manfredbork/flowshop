@@ -1,14 +1,9 @@
-// Import util
 var util = require('util');
-
-// Import flowshop files
 var Random = require('./src/random');
 var Importer = require('./src/importer');
 var Timer = require('./src/timer');
 var NEH = require('./src/neh');
 var IG = require('./src/ig');
-
-// Initialization
 var importer = new Importer(__dirname);
 var notfound = 0;
 var names = [];
@@ -18,8 +13,6 @@ var nehrpd = 0;
 var igrpd = 0;
 var repeat = 1;
 var seed = 'default';
-
-// Read arguments
 var arguments = process.argv.splice(2);
 for(var i = 0; i < arguments.length; i++) {
     if (arguments[i].match(/^ta[0-9]{3}$/)) {
@@ -64,8 +57,6 @@ for(var i = 0; i < arguments.length; i++) {
         break;
     }
 }
-
-// Overwrite Math.random()
 var BasicMath = {
     floor: Math.floor,
     random: Math.random
@@ -95,24 +86,20 @@ while (repeat > 0) {
 
         for(var j = 0; j < names.length; j++) {
 
-            // Instance data
             var name = names[j];
             var metaData = importer.loadMetaData(name);
             var matrixData = importer.loadMatrixData(name);
 
             if (metaData) {
 
-                // Auto initial seed
                 if (seed === 'auto') {
                     metaData.initialSeed = BasicMath.floor(BasicMath.random() * 9999999999);
                 } else if (util.isArray(seed) && seed[j] > 0) {
                     metaData.initialSeed = seed[j];
                 }
 
-                // Set initial seed
                 Math.initialSeed(metaData.initialSeed);
 
-                // Run algorithms
                 var elapsed = new Timer();
                 var nehrun = neh.run(matrixData);
                 var igrun = ig.run(matrixData);
@@ -140,7 +127,6 @@ while (repeat > 0) {
                 console.log('  Elapsed time:', elapsed.elapsedTime('mm:ss') + ' mins');
                 console.log('--------------------------');
 
-                // Average rpd
                 nehrpd = nehrpd + nehrun.rpd(metaData.upperBound);
                 igrpd = igrpd + igrun.rpd(metaData.upperBound);
 
