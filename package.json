@@ -1,8 +1,9 @@
 {
     "name": "flowshop",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Framework for Permutation Flow Shop Scheduling Problems",
     "keywords" : ["Flowshop", "Scheduling", "PFSP", "FSP"],
+    "main": "./flowshop.js",
     "bin": "./flowshop.js",
     "repository": {
         "type": "git",
