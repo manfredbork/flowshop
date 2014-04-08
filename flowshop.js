@@ -57,15 +57,12 @@ for(var i = 0; i < arguments.length; i++) {
         break;
     }
 }
-
 var BasicMath = {
     floor: Math.floor,
     random: Math.random
 };
-
 Random = util._extend(Random, Object.prototype);
 Math = util._extend(Math, Random.prototype);
-
 function pad(text, num) {
     while (text.length < num) {
         text = text + ' ';
@@ -78,54 +75,37 @@ var ma = '\x1b[45m\x1b[30m';
 var gr = '\x1b[42m\x1b[30m';
 var iteration = 1;
 while (repeat > 0) {
-
     var total = new Timer();
-
     nehrpd = 0;
     igrpd = 0;
     notfound = 0;
-
     if (names.length > 0) {
-
         var shown = false;
-
         if (iteration === 1) {
-
             console.log();
             console.log(ma + pad('        Processing...', pads) + rs);
             console.log();
-
         }
-
         for (var j = 0; j < names.length; j++) {
-
             var name = names[j];
             var metaData = importer.loadMetaData(name);
             var matrixData = importer.loadMatrixData(name);
-
             if (metaData) {
-
                 if (seed === 'auto') {
                     metaData.initialSeed = BasicMath.floor(BasicMath.random() * 9999999999);
                 } else if (util.isArray(seed) && seed[j] > 0) {
                     metaData.initialSeed = seed[j];
                 }
-
                 Math.initialSeed(metaData.initialSeed);
-
                 var elapsed = new Timer();
                 var nehrun = neh.run(matrixData);
                 var igrun = ig.run(matrixData);
-
                 if (iteration > 1 && shown === false) {
-
                     console.log();
                     console.log(ma + pad('        ' + iteration + '. Iteration', pads) + rs);
                     console.log();
                     shown = true;
-
                 }
-
                 console.log('          Name:', metaData.name);
                 console.log('  Initial Seed:', metaData.initialSeed);
                 console.log('          Jobs:', metaData.jobs);
@@ -139,31 +119,22 @@ while (repeat > 0) {
                 console.log('     RPD IG UB:', (Math.round(igrun.rpd(metaData.upperBound) * 100) / 100) + '%');
                 console.log('  Elapsed time:', elapsed.elapsedTime('mm:ss') + ' mins');
                 console.log();
-
                 nehrpd = nehrpd + nehrun.rpd(metaData.upperBound);
                 igrpd = igrpd + igrun.rpd(metaData.upperBound);
-
             } else {
-
                 console.log('   File ' + name + ' not found');
                 console.log();
                 notfound++;
             }
         }
-
         var nvg = (Math.round(nehrpd / (names.length - notfound) * 100) / 100);
         var ivg = (Math.round(igrpd / (names.length - notfound) * 100) / 100);
-
         if (names.length - notfound > 0) {
-
-            console.log(gr+pad(' Average RPD NEH UB: ' + nvg + '%', pads)+rs);
-            console.log(gr+pad('  Average RPD IG UB: ' + ivg + '%', pads)+rs);
-            console.log(gr+pad('    Total time: ' + total.elapsedTime('mm:ss') + ' mins', pads)+rs);
-
+            console.log(gr + pad(' Average RPD NEH UB: ' + nvg + '%', pads) + rs);
+            console.log(gr + pad('  Average RPD IG UB: ' + ivg + '%', pads) + rs);
+            console.log(gr + pad('    Total time: ' + total.elapsedTime('mm:ss') + ' mins', pads) + rs);
         }
-
     } else {
-
         console.log();
         console.log('Glossary');
         console.log('========');
@@ -191,7 +162,6 @@ while (repeat > 0) {
         console.log();
         console.log('Usage: flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNNN]');
         console.log('                [repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]');
-
     }
     repeat--;
     iteration++;
