@@ -57,15 +57,26 @@ for(var i = 0; i < arguments.length; i++) {
         break;
     }
 }
+
 var BasicMath = {
     floor: Math.floor,
     random: Math.random
 };
 
-util._extend(Math, Random.prototype);
+Random = util._extend(Random, Object.prototype);
+Math = util._extend(Math, Random.prototype);
 
+function pad(text, num) {
+    while (text.length < num) {
+        text = text + ' ';
+    }
+    return text;
+}
+var pads = 28;
+var rs = '\x1b[0m';
+var ma = '\x1b[45m\x1b[30m';
+var gr = '\x1b[42m\x1b[30m';
 var iteration = 1;
-
 while (repeat > 0) {
 
     var total = new Timer();
@@ -76,15 +87,17 @@ while (repeat > 0) {
 
     if (names.length > 0) {
 
+        var shown = false;
+
         if (iteration === 1) {
 
-            console.log('--------------------------');
-            console.log('       Processing...      ');
-            console.log('--------------------------');
+            console.log();
+            console.log(ma + pad('        Processing...', pads) + rs);
+            console.log();
 
         }
 
-        for(var j = 0; j < names.length; j++) {
+        for (var j = 0; j < names.length; j++) {
 
             var name = names[j];
             var metaData = importer.loadMetaData(name);
@@ -104,12 +117,12 @@ while (repeat > 0) {
                 var nehrun = neh.run(matrixData);
                 var igrun = ig.run(matrixData);
 
-                if (iteration > 1) {
+                if (iteration > 1 && shown === false) {
 
                     console.log();
-                    console.log('--------------------------');
-                    console.log('       ' + iteration + '. Iteration');
-                    console.log('--------------------------');
+                    console.log(ma + pad('        ' + iteration + '. Iteration', pads) + rs);
+                    console.log();
+                    shown = true;
 
                 }
 
@@ -125,7 +138,7 @@ while (repeat > 0) {
                 console.log('    RPD NEH UB:', (Math.round(nehrun.rpd(metaData.upperBound) * 100) / 100) + '%');
                 console.log('     RPD IG UB:', (Math.round(igrun.rpd(metaData.upperBound) * 100) / 100) + '%');
                 console.log('  Elapsed time:', elapsed.elapsedTime('mm:ss') + ' mins');
-                console.log('--------------------------');
+                console.log();
 
                 nehrpd = nehrpd + nehrun.rpd(metaData.upperBound);
                 igrpd = igrpd + igrun.rpd(metaData.upperBound);
@@ -133,18 +146,19 @@ while (repeat > 0) {
             } else {
 
                 console.log('   File ' + name + ' not found');
-                console.log('--------------------------');
+                console.log();
                 notfound++;
             }
         }
 
-        if (nehrpd > 0 && igrpd > 0) {
+        var nvg = (Math.round(nehrpd / (names.length - notfound) * 100) / 100);
+        var ivg = (Math.round(igrpd / (names.length - notfound) * 100) / 100);
 
-            console.log(' Average RPD NEH UB:', (Math.round(nehrpd / (names.length - notfound) * 100) / 100) + '%');
-            console.log('  Average RPD IG UB:', (Math.round(igrpd / (names.length - notfound) * 100) / 100) + '%');
-            console.log('--------------------------');
-            console.log('    Total time:', total.elapsedTime('mm:ss') + ' mins');
-            console.log('--------------------------');
+        if (names.length - notfound > 0) {
+
+            console.log(gr+pad(' Average RPD NEH UB: ' + nvg + '%', pads)+rs);
+            console.log(gr+pad('  Average RPD IG UB: ' + ivg + '%', pads)+rs);
+            console.log(gr+pad('    Total time: ' + total.elapsedTime('mm:ss') + ' mins', pads)+rs);
 
         }
 
