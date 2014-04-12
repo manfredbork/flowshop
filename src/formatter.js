@@ -71,7 +71,7 @@ Formatter.prototype = {
      */
 
     format: function (text, fgColor, bgColor, totalChars, textCentered) {
-        if (textCentered) {
+        if (textCentered === true) {
             var left = Math.floor((totalChars - text.length) / 2) + text.length;
             return fgColor + bgColor + this._spacePad(this._spacePad(text, left, true), totalChars, false) + this.reset;
         } else {
