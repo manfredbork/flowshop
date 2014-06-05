@@ -69,7 +69,7 @@ while (repeat > 0) {
             var matrixData = importer.loadMatrixData(name);
             if (metaData) {
                 if (seed === "auto") {
-                    metaData.initialSeed = BasicMath.floor(BasicMath.random() * 9999999999)
+                    metaData.initialSeed = BasicMath.floor(BasicMath.random() * 9999999999);
                 } else if (util.isArray(seed) && seed[j] > 0) {
                     metaData.initialSeed = seed[j];
                 }
