@@ -102,7 +102,7 @@ IG.prototype = {
     improvementInsertion: function (T) {
 
         // Definitions
-        var PIi, PIbest, PIimprove, PIseq, PIval, PIminseq, PIminval, PIrand, PIpos,
+        var PI, PIi, PIbest, PIimprove, PIseq, PIval, PIminseq, PIminval, PIrand, PIpos;
 
         // Initialization
         PI = T.clone();

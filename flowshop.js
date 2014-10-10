@@ -137,8 +137,7 @@ while (repeat > 0) {
         console.log("flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]");
         console.log("flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20");
         console.log();
-        console.log("Usage: flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNNN]");
-        console.log(output.offset("[repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]", 16));
+        console.log("Usage: flowshop <INSTANCES SEPARATED BY SPACES> [T=N.N] [d=N] [ms=NNNN] [repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]");
     }
     repeat--;
     iteration++;
