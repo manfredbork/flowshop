@@ -1,7 +1,7 @@
 {
     "name": "flowshop",
-    "version": "0.2.6",
-    "description": "Framework for Permutation Flow Shop Scheduling Problems",
+    "version": "0.2.7",
+    "description": "Command-line interface for Permutation Flow Shop Scheduling Problems",
     "keywords" : ["Flowshop", "Scheduling", "PFSP", "FSP"],
     "main": "./bin/cmd.js",
     "preferGlobal": true,
