@@ -7,18 +7,20 @@ Flow shop scheduling problems, are a class of scheduling problems with a work sh
     * UB: Makespan best solution Upper Bound
     * NEH: Algorithm by Nawaz, Enscore, Ham
     * IG: Iterated Greedy algorithm
+    * ALT: Alternative algorithm
     * RPD: Relative Percentage Deviation
 # Hints
     * Existing Taillard instances are ta001, ta002, ta003, ta004, ta005, ta006 etc.
     * Existing alias names for multiple Taillard instances are 20x5, 20x10, 20x20 etc.
+    * Run alternative algorithm by implementing run method as described in file nop
     * Common values for parameter T of IG algorithm are 0.0, 0.1, 0.2, 0.3, 0.4 and 0.5
     * Common values for parameter d of IG algorithm are 2, 3, 4, 5, 6, 7 and 8
     * Common values for parameter ms of IG algorithm are 20 and 60
     * Set array of 10-digit numbers to overwrite initial seeds
 # Examples
-    flowshop 20x5 20x10 repeat=2 seed=auto
+    flowshop 20x5 20x10 alt=./src/nop repeat=2 seed=auto
     flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]
     flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
     
-    Usage: flowshop <INSTANCES SEPARATED BY SPACES>
+    Usage: flowshop <INSTANCES SEPARATED BY SPACES> [alt=path/file]
     [T=N.N] [d=N] [ms=NNNN] [repeat=NN] [seed=[S1,S2,...,Sn]|auto|default]
