@@ -107,6 +107,7 @@ while (repeat > 0) {
                 console.log(output.offset("NEH Makespan:", 3), nehrun.makespan());
                 console.log(output.offset("IG Makespan:", 4), igrun.makespan());
                 console.log(output.offset("ALT Makespan:", 3), altrun.makespan());
+                console.log(output.offset("NEH Permutation:", 0), nehrun.permutation(matrixData));
                 console.log(output.offset("IG Permutation:", 1), igrun.permutation(matrixData));
                 console.log(output.offset("ALT Permutation:", 0), altrun.permutation(matrixData));
                 console.log(output.offset("RPD NEH UB:", 5), Math.round(nehrun.rpd(metaData.upperBound) * 100) / 100 + "%");
