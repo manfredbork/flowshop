@@ -153,7 +153,7 @@ while (repeat > 0) {
         console.log();
         console.log("Examples");
         console.log("========");
-        console.log("flowshop 20x5 20x10 alt=./src/nop repeat=2 seed=auto");
+        console.log("flowshop 20x5 20x10 alt=./src/nop.js repeat=2 seed=auto");
         console.log("flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]");
         console.log("flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20");
         console.log();

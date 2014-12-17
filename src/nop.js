@@ -15,7 +15,7 @@ var NOP = function () {
  * own alternative flow shop algorithm.
  *
  * For example to execute this file set
- * parameter alt=./src/nop on command-line.
+ * parameter alt=./src/nop.js on command-line.
  *
  * @module NOP
  * @class NOP

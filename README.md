@@ -18,7 +18,7 @@ Flow shop scheduling problems, are a class of scheduling problems with a work sh
     * Common values for parameter ms of IG algorithm are 20 and 60
     * Set array of 10-digit numbers to overwrite initial seeds
 # Examples
-    flowshop 20x5 20x10 alt=./src/nop repeat=2 seed=auto
+    flowshop 20x5 20x10 alt=./src/nop.js repeat=2 seed=auto
     flowshop ta001 ta002 ta003 seed=[1111111111,9999999999]
     flowshop 50x5 ta005 ta020 T=0.4 d=4 ms=20
     
