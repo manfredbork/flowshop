@@ -31,6 +31,10 @@ for (var i = 0; i < arguments.length; i++) {
         if (fs.existsSync(file)) {
             ALT = require(file);
             alt = new ALT;
+        } else {
+            console.log();
+            console.log("File " + file + " not found.");
+            console.log("Using ./src/nop.js as fallback.");
         }
     } else if (arguments[i].match(/^ms=[0-9]{1,4}$/)) {
         ig.ms = Number(arguments[i].replace("ms=", ""));
