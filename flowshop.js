@@ -38,7 +38,7 @@ for (var i = 0; i < arguments.length; i++) {
             alt = new ALT;
         } else {
             console.log();
-            console.log("File " + file + " not found.");
+            console.log("File " + fileName + " not found.");
             console.log("Using ./src/nop.js as fallback.");
         }
     } else if (arguments[i].match(/^ms=[0-9]{1,4}$/)) {
