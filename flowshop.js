@@ -27,9 +27,13 @@ for (var i = 0; i < arguments.length; i++) {
         var aliasMapping = {"20x5": ["ta001", "ta002", "ta003", "ta004", "ta005", "ta006", "ta007", "ta008", "ta009", "ta010"],"20x10": ["ta011", "ta012", "ta013", "ta014", "ta015", "ta016", "ta017", "ta018", "ta019", "ta020"], "20x20": ["ta021", "ta022", "ta023", "ta024", "ta025", "ta026", "ta027", "ta028", "ta029", "ta030"], "50x5": ["ta031", "ta032", "ta033", "ta034", "ta035", "ta036", "ta037", "ta038", "ta039", "ta040"], "50x10": ["ta041", "ta042", "ta043", "ta044", "ta045", "ta046", "ta047", "ta048", "ta049", "ta050"], "50x20": ["ta051", "ta052", "ta053", "ta054", "ta055", "ta056", "ta057", "ta058", "ta059", "ta060"], "100x5": ["ta061", "ta062", "ta063", "ta064", "ta065", "ta066", "ta067", "ta068", "ta069", "ta070"], "100x10": ["ta071", "ta072", "ta073", "ta074", "ta075", "ta076", "ta077", "ta078", "ta079", "ta080"], "100x20": ["ta081", "ta082", "ta083", "ta084", "ta085", "ta086", "ta087", "ta088", "ta089", "ta090"], "200x10": ["ta091", "ta092", "ta093", "ta094", "ta095", "ta096", "ta097", "ta098", "ta099", "ta100"], "200x20": ["ta101", "ta102", "ta103", "ta104", "ta105", "ta106", "ta107", "ta108", "ta109", "ta110"], "500x20": ["ta111", "ta112", "ta113", "ta114", "ta115", "ta116", "ta117", "ta118", "ta119", "ta120"]};
         names = names.concat(aliasMapping[arguments[i]] || []);
     } else if (arguments[i].match(/^alt=(?:\..*(?!\/))+$/)) {
-        var file = __dirname + '/' + arguments[i].replace("alt=", "");
+        var file = arguments[i].replace("alt=", "");
+        var fileRelative = __dirname + '/' + file;
         if (fs.existsSync(file)) {
             ALT = require(file);
+            alt = new ALT;
+        } else if (fs.existsSync(fileRelative)) {
+            ALT = require(fileRelative);
             alt = new ALT;
         } else {
             console.log();
