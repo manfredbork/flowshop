@@ -25,7 +25,7 @@
 
 // imports
 var fs = require('fs');
-var Matrix = require('./Matrix');
+var Matrix = require('./matrix');
 
 /**
  * @constructor
